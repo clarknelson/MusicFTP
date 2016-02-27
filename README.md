@@ -6,14 +6,16 @@ An application designed to share music over the internet. There is a server prog
 ## Team members
 Clark Nelson, Chaz Stulginskas, Eleanor Holley, Raul Vasquez
 
-## General Todos
-
-- [ ] Create Build [Link to gradle tutorial](https://docs.gradle.org/current/userguide/tutorial_java_projects.html)
-- [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet) can be used or would be helpful
-
 ## Build process
 
-1. Download and install [Gradle](http://gradle.org/gradle-download/). MacOSX users can try `brew install gradle`
+1. Change directory from root to `/src`
+2. Run `javac main/MusicFTP.java` to compile into class file
+3. Run `java main.MusicFTP` to execute the program
+
+## General Todos
+
+- [ ] Create more sophisticated build process using Maven or Gradle ([Link to Gradle tutorial](https://docs.gradle.org/current/userguide/tutorial_java_projects.html))
+- [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet) can be used or would be helpful
 
 ## Application Protocol
 
