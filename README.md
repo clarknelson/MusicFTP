@@ -11,6 +11,10 @@ Clark Nelson, Chaz Stulginskas, Eleanor Holley, Raul Vasquez
 - [ ] Create Build [Link to gradle tutorial](https://docs.gradle.org/current/userguide/tutorial_java_projects.html)
 - [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet) can be used or would be helpful
 
+## Build process
+
+1. Download and install [Gradle](http://gradle.org/gradle-download/). MacOSX users can try `brew install gradle`
+
 ## Application Protocol
 
 Each program has a protocol for communicating with the other end of the connection. This is a temporary plan for development and might change in the final program.
