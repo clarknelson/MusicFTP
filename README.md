@@ -1,7 +1,7 @@
 # MusicFTP
 An application designed to share music over the internet. There is a server program designed to accept incoming clients and parse file requests. The client program is designed to request and search files.
 
-*Goal:* Provide users a way to access music on a home computer which they can not fit on their phone or mobile device.
+**Goal:** Provide users a way to access music on a home computer which they can not fit on their phone or mobile device.
 
 ## Team members
 Clark Nelson, Chaz Stulginskas, Eleanor Holley, Raul Vasquez
