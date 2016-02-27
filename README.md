@@ -8,7 +8,8 @@ Clark Nelson, Chaz Stulginskas, Eleanor Holley, Raul Vasquez
 
 ## General Todos
 
-- [ ] Create Gradle Build [Link to tutorial](https://docs.gradle.org/current/userguide/tutorial_java_projects.html)
+- [ ] Create Build [Link to gradle tutorial](https://docs.gradle.org/current/userguide/tutorial_java_projects.html)
+- [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet) can be used or would be helpful
 
 ## Application Protocol
 
