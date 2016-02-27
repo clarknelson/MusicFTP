@@ -6,6 +6,10 @@ An application designed to share music over the internet. There is a server prog
 ## Team members
 Clark Nelson, Chaz Stulginskas, Eleanor Holley, Raul Vasquez
 
+## General Todos
+
+- [ ] Create Gradle Build [Link to tutorial](https://docs.gradle.org/current/userguide/tutorial_java_projects.html)
+
 ## Application Protocol
 
 Each program has a protocol for communicating with the other end of the connection. This is a temporary plan for development and might change in the final program.
