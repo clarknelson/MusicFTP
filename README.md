@@ -23,8 +23,8 @@ Each program has a protocol for communicating with the other end of the connecti
 
 ### Server
 
-- [ ] Create server that listens for connections and shuts down gracefully *Feb.27*
-- [ ] Server launches new thread for each connection accepted  *Feb.27*
+- [X] Create server that listens for connections and shuts down gracefully *Feb.27*
+- [X] Server launches new thread for each connection accepted  *Feb.27*
 - [ ] Thread sends welcome message *Feb.27*
 - [ ] Thread sends user information request *Feb.27*
 - [ ] Thread receives user login info *Feb.27*

@@ -6,8 +6,6 @@ import server.Server;
 public class MusicFTP {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 		if(args.length < 1){
 			// we need to know if this is a client or server
 			Util.printErr("Not enough arguments...");
@@ -16,10 +14,10 @@ public class MusicFTP {
 		}
 
 		if(args[0].equals("--client")){
-			Client c = new Client();
+			Client c = new Client(args);
 		}
 		if(args[0].equals("--server")){
-			Server s = new Server();
+			Server s = new Server(args);
 		}
 	}
 }

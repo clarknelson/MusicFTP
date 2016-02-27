@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Util {
+
 	public static void readConfigFileAt(String path){
 		try(BufferedReader in = new BufferedReader(new FileReader(path))){
 			String line = in.readLine();
@@ -16,7 +17,7 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void printHelp(){
 		printMsg("Usage: java MusicFTP [--client | --server]");
 	}
