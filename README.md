@@ -20,9 +20,10 @@ Final project for Distributed Systems CSC376 at DePaul University. An applicatio
 
 **Feb.27th**
 
-- [X] Create server that listens for connections and shuts down gracefully
+- [X] Create server that listens for connections
 - [ ] Client connects to server
 - [ ] Server sends welcome message to client
+- [ ] Client and server shutdown
 
 **Feb.28th**
 - [ ] Server asks client for authentication
