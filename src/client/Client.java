@@ -39,6 +39,8 @@ public class Client {
 			handleArgument(args[i]);
 		}
 
+		connectToServer();
+
 		openOutputToServer();
 		openInputFromServer();
 
@@ -100,7 +102,6 @@ public class Client {
 
 
 	private void openOutputToServer(){
-
 		try{
 			OutputStream op = this.SOCKET.getOutputStream();
 

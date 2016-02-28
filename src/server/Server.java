@@ -3,10 +3,12 @@ package server;
 import main.Util;
 
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server {
 
-	private ServerSocket server = null;
+	private ServerSocket SERVER = null;
+	private Socket CLIENT = null;
 	private int PORT_NUMBER = 3000;
 
 	public Server(String[] args){
@@ -46,9 +48,9 @@ public class Server {
 		try{
 			// ServerSocket can take one extra parameter:
 			// backlog - requested maximum length of the queue of incoming connections.
-			this.server = new ServerSocket(this.PORT_NUMBER);
+			this.SERVER = new ServerSocket(this.PORT_NUMBER);
 			// Program locks up while waiting for a client
-			this.server.accept();
+			this.CLIENT = this.SERVER.accept();
 		} catch (Exception e) {
 			Util.catchException("Can not open socket", e);
 		}
