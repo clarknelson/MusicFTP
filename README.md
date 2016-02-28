@@ -1,53 +1,70 @@
 # MusicFTP
-An application designed to share music over the internet. There is a server program designed to accept incoming clients and parse file requests. The client program is designed to request and search files.
+*Authors:* Clark Nelson, Chaz Stulginskas, Eleanor Holley, Raul Vasquez
+Final project for Distributed Systems CSC376 at DePaul University. An application designed to share music over the internet. The server program designed to accept incoming clients and parse file requests. The client program is designed to request and search files.
 
 **Goal:** Provide users a way to access music on a home computer which they can not fit on their phone or mobile device.
 
-## Team members
-Clark Nelson, Chaz Stulginskas, Eleanor Holley, Raul Vasquez
-
 ## Build process
 
-1. Change directory from root to `/src`
-2. Run `javac main/MusicFTP.java` to compile into class file
+1. Change directory to `MusicFTP/src`
+2. Run `javac **/*.java` to compile source code
 3. Run `java main.MusicFTP` to execute the program
 
 ## General Todos
 
-- [ ] Create more sophisticated build process using Maven or Gradle ([Link to Gradle tutorial](https://docs.gradle.org/current/userguide/tutorial_java_projects.html))
-- [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet) can be used or would be helpful
+- [ ] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client`)
+- [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  be helpful
 
 ## Application Protocol
 
-Each program has a protocol for communicating with the other end of the connection. This is a temporary plan for development and might change in the final program.
 
 ### Server
 
-- [X] Create server that listens for connections and shuts down gracefully *Feb.27*
-- [X] Server launches new thread for each connection accepted  *Feb.27*
-- [ ] Thread sends welcome message *Feb.27*
-- [ ] Thread sends user information request *Feb.27*
-- [ ] Thread receives user login info *Feb.27*
-- [ ] Thread sends list of available songs from directory *Feb.27*
-- [ ] Thread receives client song request *Mar.5*
-- [ ] Thread reads name of file requested from remote client *Mar.5*
-- [ ] Thread checks whether file exists and can be read *Mar.5*
-- [ ] Thread responds with either the number of bytes in the file or a negative number indicating an error *Mar.5*
-- [ ] Thread attempts to send requested file *Mar.5*
-- [ ] Finish any remaining server functionality *Mar.12*
+This is a general summary of how to run the server.
 
 ### Client
 
-- [ ] Client connects to server using command line arguments or config file *Feb.29*
-- [ ] Client receives welcome message from server *Feb.29*
-- [ ] Client sends username / password to server *Feb.29*
-- [ ] Client receives list of available songs *Feb.29*
-- [ ] Client sends name of file to server *Feb.29*
-- [ ] Client reads response from server *Mar.7*
-- [ ] If client receives error message, the client will respond appropriately *Mar.7*
-- [ ] If the client receives a file size, it will open a new music file to read bytes into *Mar.7*
-- [ ] Add ability to search music file names sent by server *Mar.12*
-- [ ] Finish any remaining client functionality *Mar.12*
+This is a general summary of how to run the client.
+
+What does the help menu look like?
+
+## Timeline
+
+**Feb.27th**
+
+- [X] Create server that listens for connections and shuts down gracefully
+- [X] Server launches new thread for each connection accepted  
+- [ ] Thread sends welcome message
+- [ ] Thread sends user information request
+- [ ] Thread receives user login info
+
+**Feb.29th**
+
+- [ ] Client connects to server using command line arguments or config file
+- [ ] Client receives welcome message from server
+- [ ] Client sends username / password to server
+- [ ] Client receives list of available songs
+- [ ] Client sends name of file to server
+
+**Mar.5th**
+
+- [ ] Thread receives client song request
+- [ ] Thread reads name of file requested from remote client
+- [ ] Thread checks whether file exists and can be read
+- [ ] Thread responds with either the number of bytes in the file or a negative number indicating an error
+- [ ] Thread attempts to send requested file
+
+**Mar.7th**
+
+- [ ] Client reads response from server
+- [ ] If client receives error message, the client will respond appropriately
+- [ ] If the client receives a file size, it will open a new music file to read bytes into
+
+**Mar.12th**
+
+- [ ] Finish any remaining server functionality
+- [ ] Add ability to search music file names sent by server
+- [ ] Finish any remaining client functionality
 
 ## Detailed Description
 
