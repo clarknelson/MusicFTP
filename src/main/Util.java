@@ -5,7 +5,7 @@ import java.io.FileReader;
 
 public class Util {
 
-	public static void readConfigFileAt(String path){
+	public static void readTextFileAt(String path){
 		try(BufferedReader in = new BufferedReader(new FileReader(path))){
 			String line = in.readLine();
 			while(line != null){
