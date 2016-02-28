@@ -44,7 +44,7 @@ public class Client {
 		openOutputToServer();
 		openInputFromServer();
 
-		closeStreams();
+		cleanUp();
 	}
 
 	private void handleArgument(String arg){
@@ -102,9 +102,7 @@ public class Client {
 	private void openOutputToServer(){
 		try{
 			OutputStream op = this.SOCKET.getOutputStream();
-
-
-			this.CLIENT_OUT = new PrintWriter(op);
+			this.CLIENT_OUT = new PrintWriter(op, true);
 		} catch (Exception e){
 			Util.catchException("Could not open output to server", e);
 		}
@@ -117,14 +115,30 @@ public class Client {
 			InputStreamReader isr = new InputStreamReader(is);
 			this.CLIENT_IN = new BufferedReader(isr);
 
-			String nextLine = this.CLIENT_IN.readLine();
+			while(true){
+				String nextLine = this.CLIENT_IN.readLine();
+
+				if(nextLine != null){
+					Util.printMsg(nextLine);
+					break;
+				}
+
+			}
+
+
 
 		} catch (Exception e) {
 			Util.catchException("Could not read from server", e);
 		}
 
 	}
-	private void closeStreams(){
-
+	private void cleanUp(){
+		try{
+			this.CLIENT_IN.close();
+			this.CLIENT_OUT.close();
+			this.SOCKET.close();
+		} catch (Exception e) {
+			Util.catchException("Could not clean up program", e);
+		}
 	}
 }
