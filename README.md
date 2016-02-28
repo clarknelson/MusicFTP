@@ -16,19 +16,6 @@ Final project for Distributed Systems CSC376 at DePaul University. An applicatio
 - [ ] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files)
 - [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  would be helpful in creating a frontend
 
-## Application Protocol
-
-
-### Server
-
-This is a general summary of how to run the server. Starts server on whatever computer the program is run on.
-
-### Client
-
-This is a general summary of how to run the client.
-
-@TODO What does the help menu look like?
-
 ## Timeline
 
 **Feb.27th**
@@ -70,6 +57,18 @@ This is a general summary of how to run the client.
 - [ ] Finish any remaining server functionality
 - [ ] Add ability to search music file names sent by server
 - [ ] Finish any remaining client functionality
+
+## Documentation
+
+### Server
+
+This is a general summary of how to run the server. Starts server on whatever computer the program is run on.
+
+### Client
+
+This is a general summary of how to run the client.
+
+@TODO What does the help menu look like?
 
 ## Detailed Description
 
