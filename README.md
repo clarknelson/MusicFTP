@@ -1,5 +1,6 @@
 # MusicFTP
 *Authors:* Clark Nelson, Chaz Stulginskas, Eleanor Holley, Raul Vasquez
+
 Final project for Distributed Systems CSC376 at DePaul University. An application designed to share music over the internet. The server program designed to accept incoming clients and parse file requests. The client program is designed to request and search files.
 
 **Goal:** Provide users a way to access music on a home computer which they can not fit on their phone or mobile device.
@@ -12,31 +13,35 @@ Final project for Distributed Systems CSC376 at DePaul University. An applicatio
 
 ## General Todos
 
-- [ ] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client`)
-- [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  be helpful
+- [ ] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files)
+- [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  would be helpful in creating a frontend
 
 ## Application Protocol
 
 
 ### Server
 
-This is a general summary of how to run the server.
+This is a general summary of how to run the server. Starts server on whatever computer the program is run on.
 
 ### Client
 
 This is a general summary of how to run the client.
 
-What does the help menu look like?
+@TODO What does the help menu look like?
 
 ## Timeline
 
 **Feb.27th**
 
 - [X] Create server that listens for connections and shuts down gracefully
-- [X] Server launches new thread for each connection accepted  
-- [ ] Thread sends welcome message
-- [ ] Thread sends user information request
-- [ ] Thread receives user login info
+- [ ] Client connects to server
+- [ ] Server sends welcome message to client
+
+**Feb.28th**
+- [ ] Server asks client for authentication
+- [ ] Client sends to server username and password
+- [ ] Server checks authentication
+- [ ] Server launches new thread for each connection accepted  
 
 **Feb.29th**
 
