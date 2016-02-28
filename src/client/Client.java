@@ -91,10 +91,8 @@ public class Client {
 
 	private void connectToServer(){
 		try{
-			Util.printMsg("connecting to socket with " + this.PORT_NUMBER + " and " + this.HOSTNAME.getHostName());
 			this.SOCKET = new Socket(this.HOSTNAME, this.PORT_NUMBER);
-
-
+			Util.printMsg("Connected to server...");
 		} catch (Exception e){
 			Util.catchException("Could not open socket to server", e);
 		}

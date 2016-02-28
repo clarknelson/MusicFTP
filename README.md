@@ -22,37 +22,36 @@ Final project for Distributed Systems CSC376 at DePaul University. An applicatio
 **Feb.27th**
 
 - [X] Create server that listens for connections
-- [ ] Client connects to server
+- [X] Client connects to server
 - [ ] Server sends welcome message to client
+- [ ] Client receives welcome message from server
 - [ ] Client and server shutdown
-
-**Feb.28th**
-- [ ] Server asks client for authentication
-- [ ] Client sends to server username and password
-- [ ] Server checks authentication
-- [ ] Server launches new thread for each connection accepted  
 
 **Feb.29th**
 
-- [ ] Client connects to server using command line arguments or config file
-- [ ] Client receives welcome message from server
+- [ ] Server asks client for authentication
 - [ ] Client sends username / password to server
+- [ ] Server checks authentication
+- [ ] Server launches new thread for each connection accepted  
+
+**Mar.1st**
+
+- [ ] Client sends request to server for list of songs
+- [ ] Server reads list of files from directory
+- [ ] Server sends list of files to the client
 - [ ] Client receives list of available songs
+
+**Mar.3nd**
+
 - [ ] Client sends name of file to server
+- [ ] Server receives song request
+- [ ] Server checks whether file exists and can be read
+- [ ] Server responds with either the number of bytes in the file or a negative number indicating an error
+- [ ] Server attempts to send requested file to Client
 
 **Mar.5th**
 
-- [ ] Thread receives client song request
-- [ ] Thread reads name of file requested from remote client
-- [ ] Thread checks whether file exists and can be read
-- [ ] Thread responds with either the number of bytes in the file or a negative number indicating an error
-- [ ] Thread attempts to send requested file
-
-**Mar.7th**
-
-- [ ] Client reads response from server
-- [ ] If client receives error message, the client will respond appropriately
-- [ ] If the client receives a file size, it will open a new music file to read bytes into
+- [ ] Find more things to do
 
 **Mar.12th**
 
