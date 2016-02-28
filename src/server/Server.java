@@ -2,20 +2,19 @@ package server;
 
 import main.Util;
 
+import java.net.ServerSocket;
+
 public class Server {
 
 	private ServerSocket server = null;
 	private int PORT_NUMBER = 3000;
 
 	public Server(String[] args){
-
-		// @TODO read configuration file
 		Util.printMsg("Starting server...");
 
 		if(args.length <= 1){
-			// the user didnt supply any additional arguemets when they ran the server
-			Util.printMsg("Optional arguments:");
-			Util.printMsg("-p=[port-number]");
+			// user did not supply any additional arguemets
+			Util.printMsg("Optional arguments: -p=[port-number]");
 		}
 
 		// args[0] is equal to "--server"
@@ -29,19 +28,29 @@ public class Server {
 	private void parseArgument(String arg){
 		Util.printMsg("Command line argument: " + arg);
 
-		if(arg.startsWith("-p")){ // parse port number
-			// @TODO make sure the port number isnt something bad
-			// maybe check what ports are already open
-			String portString = arg.substring(3, arg.length());
-			int portInt = Integer.parseInt(portString);
-			Util.printMsg("Setting port number to: " + portString);
-			this.PORT_NUMBER = portInt;
+		if(arg.startsWith("-p")){
+			try{ // to parse port number
+				String portString = arg.substring(3, arg.length());
+				int portInt = Integer.parseInt(portString);
+				Util.printMsg("Setting port number to: " + portString);
+				// @TODO make sure the port number isnt a bad value
+				this.PORT_NUMBER = portInt;
+			} catch (Exception e) {
+				Util.catchException("Can not parse port number", e);
+			}
+
 		}
 	}
 
 	private void startServer(){
-		/* ServerSocket takes one extra parameter:
-		backlog - requested maximum length of the queue of incoming connections. */
-		this.server = new ServerSocket(this.PORT_NUMBER);
+		try{
+			// ServerSocket can take one extra parameter:
+			// backlog - requested maximum length of the queue of incoming connections.
+			this.server = new ServerSocket(this.PORT_NUMBER);
+			// Program locks up while waiting for a client
+			this.server.accept();
+		} catch (Exception e) {
+			Util.catchException("Can not open socket", e);
+		}
 	}
 }

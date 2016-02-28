@@ -18,6 +18,18 @@ public class Util {
 		}
 	}
 
+
+
+	public static void catchException(Exception e){
+		e.printStackTrace();
+		System.exit(1);
+	}
+	public static void catchException(String m, Exception e){
+		printErr("ERROR: " + m);
+		e.printStackTrace();
+		System.exit(1);
+	}
+
 	public static void printHelp(){
 		printMsg("Usage: java MusicFTP [--client | --server]");
 	}
