@@ -5,17 +5,20 @@ Final project for Distributed Systems CSC376 at DePaul University. An applicatio
 
 **Goal:** Provide users a way to access music on a home computer which they can not fit on their phone or mobile device.
 
-## Build process
+## Build
 
-1. Change directory to `MusicFTP/src`
-2. Run `javac **/*.java` to compile source code
-3. Run `java main.MusicFTP` to execute the program
+Run `javac **/*.java` from `MusicFTP/src` to compile source code
+
+## Usage
+
+    java main.MusicFTP --server
+    java main.MusicFTP --client
 
 ## General Todos
 
 - [ ] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files)
 - [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  would be helpful in creating a frontend
-- [ ] JSON config file to store host/port information, approved users, etc
+- [ ] JSON config file to store connection information, approved users, etc
 
 ## Timeline
 
@@ -23,6 +26,10 @@ Final project for Distributed Systems CSC376 at DePaul University. An applicatio
 
 - [X] Create server that listens for connections
 - [X] Client connects to server
+- [X] Client can send messages to the server
+- [X] Server can send messages to the client
+- [X] Client can read messages from the Server
+- [X] Server can read messages from the Client
 - [ ] Server sends welcome message to client
 - [ ] Client receives welcome message from server
 - [ ] Client and server shutdown
