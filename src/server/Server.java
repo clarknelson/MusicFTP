@@ -1,6 +1,7 @@
 package server;
 
 import main.Util;
+import main.ReaderThread;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -38,10 +39,9 @@ public class Server {
 
 		startServer();
 
-		openOutputToClient();
+		openInputFromTerminal();
 		openInputFromClient();
 
-		cleanUp();
 	}
 
 	private void parseArgument(String arg){
@@ -75,39 +75,22 @@ public class Server {
 		}
 	}
 
-	private void openInputFromClient(){
+	private void openInputFromTerminal(){
 		try{
-			InputStream is = this.CLIENT.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is);
-			this.SERVER_IN = new BufferedReader(isr);
-
-			//Util.printMsg();
-			//String nextLine = this.SERVER_IN.readLine();
-			//Util.printMsg(nextLine);
-
+			ReaderThread console = new ReaderThread("terminal", System.in, this.CLIENT.getOutputStream());
+			Thread consoleThread = new Thread(console);
+			consoleThread.start();
 		} catch (Exception e) {
-			Util.catchException("Could not read from server", e);
-		}
-	}
-	private void openOutputToClient(){
-		try{
-			OutputStream op = this.CLIENT.getOutputStream();
-			this.SERVER_OUT = new PrintWriter(op, true);
-			this.SERVER_OUT.write("Hello client");
-			Util.printMsg("wrote something to client");
-		} catch (Exception e){
 			Util.catchException("Could not open output to server", e);
 		}
 	}
-
-	private void cleanUp(){
+	private void openInputFromClient(){
 		try{
-			this.SERVER_IN.close();
-			this.SERVER_OUT.close();
-			this.SERVER.close();
-			this.CLIENT.close();
+			ReaderThread client = new ReaderThread("client", this.CLIENT.getInputStream(), System.out);
+			Thread clientThread = new Thread(client);
+			clientThread.start();
 		} catch (Exception e) {
-			Util.catchException("Could not clean up program", e);
+			Util.catchException("Could not open output to server", e);
 		}
 	}
 }

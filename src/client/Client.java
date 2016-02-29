@@ -1,6 +1,7 @@
 package client;
 
 import main.Util;
+import main.ReaderThread;
 
 // connection packages
 import java.net.Socket;
@@ -15,14 +16,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
+
+
 public class Client {
 
 	private Socket SOCKET = null;
 	private InetAddress HOSTNAME = null;
 	private int PORT_NUMBER = 3000;
 
-	private PrintWriter CLIENT_OUT = null;
-	private BufferedReader CLIENT_IN = null;
+	public PrintWriter CLIENT_OUT = null;
 
 	public Client(String[] args){
 		System.out.println("Starting client...");
@@ -41,10 +43,9 @@ public class Client {
 
 		connectToServer();
 
-		openOutputToServer();
+		openInputFromTerminal();
 		openInputFromServer();
 
-		cleanUp();
 	}
 
 	private void handleArgument(String arg){
@@ -98,47 +99,23 @@ public class Client {
 		}
 	}
 
-
-	private void openOutputToServer(){
+	private void openInputFromTerminal(){
 		try{
-			OutputStream op = this.SOCKET.getOutputStream();
-			this.CLIENT_OUT = new PrintWriter(op, true);
-		} catch (Exception e){
+			ReaderThread console = new ReaderThread("terminal", System.in, this.SOCKET.getOutputStream());
+			Thread consoleThread = new Thread(console);
+			consoleThread.start();
+		} catch (Exception e) {
 			Util.catchException("Could not open output to server", e);
 		}
-
 	}
+
 	private void openInputFromServer(){
-
 		try{
-			InputStream is = this.SOCKET.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is);
-			this.CLIENT_IN = new BufferedReader(isr);
-
-			while(true){
-				String nextLine = this.CLIENT_IN.readLine();
-
-				if(nextLine != null){
-					Util.printMsg(nextLine);
-					break;
-				}
-
-			}
-
-
-
-		} catch (Exception e) {
-			Util.catchException("Could not read from server", e);
-		}
-
-	}
-	private void cleanUp(){
-		try{
-			this.CLIENT_IN.close();
-			this.CLIENT_OUT.close();
-			this.SOCKET.close();
-		} catch (Exception e) {
-			Util.catchException("Could not clean up program", e);
+			ReaderThread server = new ReaderThread("server", this.SOCKET.getInputStream(), System.out);
+			Thread serverThread = new Thread(server);
+			serverThread.start();
+		} catch (Exception e){
+			Util.catchException("Can not open thread to listen to server", e);
 		}
 	}
 }
