@@ -15,8 +15,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
-public class Server {
+//Get songs
+import musicManager.MusicManager;
+//MusicManager.getSongs(); -> String[]
 
+public class Server {
+	
 	private ServerSocket SERVER = null;
 	private Socket CLIENT = null;
 	private int PORT_NUMBER = 3000;
@@ -41,7 +45,6 @@ public class Server {
 
 		openInputFromTerminal();
 		openInputFromClient();
-
 	}
 
 	private void parseArgument(String arg){
