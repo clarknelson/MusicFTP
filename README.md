@@ -16,7 +16,7 @@ Run `javac **/*.java` from `MusicFTP/src` to compile source code
 
 ## General Todos
 
-- [ ] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files)
+- [X] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files)
 - [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  would be helpful in creating a frontend
 - [ ] JSON config file to store connection information, approved users, etc
 

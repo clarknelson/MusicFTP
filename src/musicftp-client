@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#USAGE (unix based OS): [chmod 777 musicftp-client]
+
+javac **/*.java
+java main.MusicFTP --client

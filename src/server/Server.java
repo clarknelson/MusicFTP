@@ -15,6 +15,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
+//Get songs
+import musicManager.MusicManager;
+
 public class Server {
 
 	private ServerSocket SERVER = null;
@@ -41,7 +44,6 @@ public class Server {
 
 		openInputFromTerminal();
 		openInputFromClient();
-
 	}
 
 	private void parseArgument(String arg){
