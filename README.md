@@ -3,7 +3,7 @@
 
 Final project for Distributed Systems CSC376 at DePaul University. An application designed to share music over the internet. The server program designed to accept incoming clients and parse file requests. The client program is designed to request and search files.
 
-**Goal:** Provide users a way to access music on a home computer which they can not fit on their phone or mobile device.
+**Goal:** Provide users a way to access music from a home computer which they can not fit on their phone or mobile device.
 
 ## Build
 
@@ -66,17 +66,7 @@ Run `javac **/*.java` from `MusicFTP/src` to compile source code
 - [ ] Add ability to search music file names sent by server
 - [ ] Finish any remaining client functionality
 
-## Documentation
-
-### Server
-
-This is a general summary of how to run the server. Starts server on whatever computer the program is run on.
-
-### Client
-
-This is a general summary of how to run the client.
-
-#### Help Menu
+### Classes
 
 ## Detailed Description
 
