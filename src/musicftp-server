@@ -2,6 +2,5 @@
 
 #USAGE for unix based OS: [chmod 777 musicftp-server]
 
-
 javac **/*.java
 java main.MusicFTP --server
