@@ -1,8 +1,0 @@
-#!/bin/bash
-
-#USAGE (unix based OS): 
-chmod 777 musicftp-server
-chmod 777 musicftp-client
-
-javac **/*.java
-java musicManager.MusicManager
