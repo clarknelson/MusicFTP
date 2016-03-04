@@ -72,6 +72,8 @@ public class Server {
 			// Program locks up while waiting for a client
 			this.CLIENT = this.SERVER.accept();
 			Util.printMsg("Server connected to client...");
+
+			//MusicManager.getSongs(); -> String[]
 		} catch (Exception e) {
 			Util.catchException("Can not open socket", e);
 		}

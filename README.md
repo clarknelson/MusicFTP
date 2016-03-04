@@ -5,18 +5,14 @@ Final project for Distributed Systems CSC376 at DePaul University. An applicatio
 
 **Goal:** Provide users a way to access music from a home computer which they can not fit on their phone or mobile device.
 
-## Build
-
-Run `javac **/*.java` from `MusicFTP/src` to compile source code
-
 ## Usage
 
-    java main.MusicFTP --server
-    java main.MusicFTP --client
+From MusicFTP folder run `./src/musicftp-server`
+
+After the server is running, connect a client using `./src/musicftp-client`
 
 ## General Todos
 
-- [X] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files)
 - [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  would be helpful in creating a frontend
 - [ ] JSON config file to store connection information, approved users, etc
 
@@ -30,25 +26,32 @@ Run `javac **/*.java` from `MusicFTP/src` to compile source code
 - [X] Server can send messages to the client
 - [X] Client can read messages from the Server
 - [X] Server can read messages from the Client
+
+**Mar.2nd**
+
+- [X] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files)
+
+#### shutdown
+
+- [ ] Shutdown server
+
+#### disconnect
+
+- [ ] Disconnect client
+
 - [ ] Server sends welcome message to client
 - [ ] Client receives welcome message from server
-- [ ] Client and server shutdown
 
-**Feb.29th**
+- [ ] Server launches new thread for each connection accepted
 
-- [ ] Server asks client for authentication
-- [ ] Client sends username / password to server
-- [ ] Server checks authentication
-- [ ] Server launches new thread for each connection accepted  
-
-**Mar.1st**
+#### list
 
 - [ ] Client sends request to server for list of songs
 - [ ] Server reads list of files from directory
 - [ ] Server sends list of files to the client
 - [ ] Client receives list of available songs
 
-**Mar.3nd**
+#### download
 
 - [ ] Client sends name of file to server
 - [ ] Server receives song request
@@ -56,14 +59,42 @@ Run `javac **/*.java` from `MusicFTP/src` to compile source code
 - [ ] Server responds with either the number of bytes in the file or a negative number indicating an error
 - [ ] Server attempts to send requested file to Client
 
+#### search
+
+- [ ] Song metadata
+- [ ] Client searches available songs
+
+#### stretch functionality
+
+- [ ] Server asks client for authentication
+- [ ] Client sends username / password to server
+- [ ] Server checks authentication
+
+- [ ] Play/launch song from client
+
+**Mar.3nd**
+
 **Mar.5th**
 
-- [ ] Find more things to do
+**Mar.7th**
 
-**Mar.12th**
+**Mar.9th**
 
-- [ ] Finish any remaining server functionality
+*Program finished*
+
+**Mar.11th**
+
+**Mar.13th**
+
+**Mar.15th**
+
+**Mar.16th**
+
+*FINAL PRESENTATIONS: 11:30am - 1:45pm*
+
+
 - [ ] Add ability to search music file names sent by server
+- [ ] Finish any remaining server functionality
 - [ ] Finish any remaining client functionality
 
 ### Classes
