@@ -1,7 +1,7 @@
 package server;
 
 import main.Util;
-import main.ReaderThread;
+import main.SocketListener;
 import main.ConsoleListener;
 
 import java.net.ServerSocket;
@@ -110,7 +110,7 @@ public class Server {
 	}
 	private void openInputFromClient(){
 		try{
-			ReaderThread client = new ReaderThread(this.CLIENT);
+			SocketListener client = new SocketListener(this.CLIENT);
 			Thread clientThread = new Thread(client);
 			clientThread.start();
 		} catch (Exception e) {

@@ -27,7 +27,9 @@ public class ConsoleListener implements Runnable {
     }
 
     public void run(){
-        try(
+        try( // try-with-resources
+        // safely closes stream when try block closes
+        // for us, it closes when the input stream is closed
         BufferedReader in = new BufferedReader(
         new InputStreamReader(this.stream))){
             while((text = in.readLine()) != null){

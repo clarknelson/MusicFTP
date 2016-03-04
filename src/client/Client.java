@@ -1,7 +1,7 @@
 package client;
 
 import main.Util;
-import main.ReaderThread;
+import main.SocketListener;
 import main.ConsoleListener;
 
 // connection packages
@@ -119,7 +119,7 @@ public class Client {
 
 	private void openInputFromServer(){
 		try{
-			ReaderThread server = new ReaderThread(this.SOCKET);
+			SocketListener server = new SocketListener(this.SOCKET);
 			Thread serverThread = new Thread(server);
 			serverThread.start();
 		} catch (Exception e){
