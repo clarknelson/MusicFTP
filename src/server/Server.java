@@ -2,6 +2,7 @@ package server;
 
 import main.Util;
 import main.ReaderThread;
+import main.ConsoleListener;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -9,11 +10,14 @@ import java.net.Socket;
 // write to client
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.DataOutputStream;
 
 // read from client
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
+
+import java.net.InetAddress;
 
 //Get songs
 import musicManager.MusicManager;
@@ -24,8 +28,7 @@ public class Server {
 	private Socket CLIENT = null;
 	private int PORT_NUMBER = 3000;
 
-	private PrintWriter SERVER_OUT = null;
-	private BufferedReader SERVER_IN = null;
+	private DataOutputStream SERVER_OUT = null;
 
 	public Server(String[] args){
 		Util.printMsg("Starting server...");
@@ -42,8 +45,12 @@ public class Server {
 
 		startServer();
 
+		openOutputToClient();
+
 		openInputFromTerminal();
 		openInputFromClient();
+
+		addShutdownHook();
 	}
 
 	private void parseArgument(String arg){
@@ -54,6 +61,7 @@ public class Server {
 				String portString = arg.substring(3, arg.length());
 				int portInt = Integer.parseInt(portString);
 				Util.printMsg("Setting port number to: " + portString);
+
 				// @TODO make sure the port number isnt a bad value
 				this.PORT_NUMBER = portInt;
 			} catch (Exception e) {
@@ -68,10 +76,13 @@ public class Server {
 			// ServerSocket can take one extra parameter:
 			// backlog - requested maximum length of the queue of incoming connections.
 			this.SERVER = new ServerSocket(this.PORT_NUMBER);
-			Util.printMsg("Waiting for client...");
+			InetAddress inet = this.SERVER.getInetAddress();
+			Util.printMsg("Waiting for client on "+ inet.getHostName() + "...");
+
 			// Program locks up while waiting for a client
 			this.CLIENT = this.SERVER.accept();
 			Util.printMsg("Server connected to client...");
+			//Util.printMsg(this.SERVER.isBound());
 
 			//MusicManager.getSongs(); -> String[]
 		} catch (Exception e) {
@@ -79,22 +90,45 @@ public class Server {
 		}
 	}
 
+	private void openOutputToClient(){
+		try{
+			this.SERVER_OUT = new DataOutputStream(this.CLIENT.getOutputStream());
+		} catch (Exception e) {
+			Util.catchException("Could not open output to client", e);
+		}
+
+	}
+
 	private void openInputFromTerminal(){
 		try{
-			ReaderThread console = new ReaderThread("terminal", System.in, this.CLIENT.getOutputStream());
+			ConsoleListener console = new ConsoleListener(System.in, this.CLIENT.getOutputStream());
 			Thread consoleThread = new Thread(console);
 			consoleThread.start();
 		} catch (Exception e) {
-			Util.catchException("Could not open output to server", e);
+			Util.catchException("Could not start console listener thread", e);
 		}
 	}
 	private void openInputFromClient(){
 		try{
-			ReaderThread client = new ReaderThread("client", this.CLIENT.getInputStream(), System.out);
+			ReaderThread client = new ReaderThread(this.CLIENT);
 			Thread clientThread = new Thread(client);
 			clientThread.start();
 		} catch (Exception e) {
-			Util.catchException("Could not open output to server", e);
+			Util.catchException("Could not start client listener thread", e);
 		}
+	}
+
+	private void addShutdownHook(){
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				try{
+					SERVER_OUT.writeUTF("shutdown");
+					CLIENT.close();
+					SERVER.close();
+				} catch (Exception e) {
+					Util.catchException("Could not close sockets", e);
+				}
+			}
+	 	});
 	}
 }

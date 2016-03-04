@@ -2,6 +2,7 @@ package client;
 
 import main.Util;
 import main.ReaderThread;
+import main.ConsoleListener;
 
 // connection packages
 import java.net.Socket;
@@ -10,12 +11,12 @@ import java.net.InetAddress;
 // open output from server
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.DataOutputStream;
 
 // open input from server
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-
 
 
 public class Client {
@@ -24,7 +25,7 @@ public class Client {
 	private InetAddress HOSTNAME = null;
 	private int PORT_NUMBER = 3000;
 
-	public PrintWriter CLIENT_OUT = null;
+	public DataOutputStream CLIENT_OUT = null;
 
 	public Client(String[] args){
 		System.out.println("Starting client...");
@@ -45,7 +46,6 @@ public class Client {
 
 		openInputFromTerminal();
 		openInputFromServer();
-
 	}
 
 	private void handleArgument(String arg){
@@ -99,9 +99,17 @@ public class Client {
 		}
 	}
 
+	private void openOutputToServer(){
+		try{
+			this.CLIENT_OUT = new DataOutputStream(this.SOCKET.getOutputStream());
+		} catch (Exception e){
+			Util.catchException("Could not open output stream to server", e);
+		}
+
+	}
 	private void openInputFromTerminal(){
 		try{
-			ReaderThread console = new ReaderThread("terminal", System.in, this.SOCKET.getOutputStream());
+			ConsoleListener console = new ConsoleListener(System.in, this.SOCKET.getOutputStream());
 			Thread consoleThread = new Thread(console);
 			consoleThread.start();
 		} catch (Exception e) {
@@ -111,11 +119,24 @@ public class Client {
 
 	private void openInputFromServer(){
 		try{
-			ReaderThread server = new ReaderThread("server", this.SOCKET.getInputStream(), System.out);
+			ReaderThread server = new ReaderThread(this.SOCKET);
 			Thread serverThread = new Thread(server);
 			serverThread.start();
 		} catch (Exception e){
 			Util.catchException("Can not open thread to listen to server", e);
 		}
+	}
+
+	private void addShutdownHook(){
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				try{
+					CLIENT_OUT.writeUTF("shutdown");
+					SOCKET.close();
+				} catch (Exception e) {
+					Util.catchException("Could not close sockets", e);
+				}
+			}
+	 	});
 	}
 }
