@@ -13,23 +13,37 @@ After the server is running, connect a client using `./src/musicftp-client`
 
 ## General Todos
 
-- [ ] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  would be helpful in creating a frontend
+
 - [ ] JSON config file to store connection information, approved users, etc
 
 ## Timeline
 
 **Feb.27th**
 
-- [X] Create server that listens for connections
-- [X] Client connects to server
-- [X] Client can send messages to the server
-- [X] Server can send messages to the client
-- [X] Client can read messages from the Server
-- [X] Server can read messages from the Client
+- [X] Create server that listens for connections [clark]
+- [X] Client connects to server [clark]
+- [X] Client can send messages to the server [clark]
+- [X] Server can send messages to the client [clark]
+- [X] Client can read messages from the Server [clark]
+- [X] Server can read messages from the Client [clark]
 
 **Mar.2nd**
 
-- [X] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files)
+- [X] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files) [raul]
+- [X] Start of program for music [raul]
+- [X] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  would be helpful in creating a front-end (it's not) [clark]
+
+**Mar.4th**
+
+**Mar.9th**
+
+*Program should be finished*
+
+**Mar.16th**
+
+*FINAL PRESENTATIONS: 11:30am - 1:45pm*
+
+## Functionality
 
 #### shutdown
 
@@ -38,10 +52,8 @@ After the server is running, connect a client using `./src/musicftp-client`
 #### disconnect
 
 - [ ] Disconnect client
-
 - [ ] Server sends welcome message to client
 - [ ] Client receives welcome message from server
-
 - [ ] Server launches new thread for each connection accepted
 
 #### list
@@ -69,35 +81,7 @@ After the server is running, connect a client using `./src/musicftp-client`
 - [ ] Server asks client for authentication
 - [ ] Client sends username / password to server
 - [ ] Server checks authentication
-
 - [ ] Play/launch song from client
-
-**Mar.3nd**
-
-**Mar.5th**
-
-**Mar.7th**
-
-**Mar.9th**
-
-*Program finished*
-
-**Mar.11th**
-
-**Mar.13th**
-
-**Mar.15th**
-
-**Mar.16th**
-
-*FINAL PRESENTATIONS: 11:30am - 1:45pm*
-
-
-- [ ] Add ability to search music file names sent by server
-- [ ] Finish any remaining server functionality
-- [ ] Finish any remaining client functionality
-
-### Classes
 
 ## Detailed Description
 
