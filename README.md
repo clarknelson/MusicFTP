@@ -31,9 +31,13 @@ After the server is running, connect a client using `./src/musicftp-client`
 
 - [X] Create Bash file for easy execution of program (`musicftp-server` and `musicftp-client` to start the programs, `compile` to build java files) [raul]
 - [X] Start of program for music [raul]
-- [X] Find out if [Java Servlets](https://en.wikipedia.org/wiki/Java_servlet)  would be helpful in creating a front-end (it's not) [clark]
 
 **Mar.4th**
+
+- [X] Convert BufferedReader and PrintWriter to DataInputStream and DataOutputStream [clark]
+- [X] Added ClientQueue and ServerQueue classes to manage messages sent from the other end [clark]
+- [X] Server and client recognize shutdown messages and close the socket [clark]
+- [X] Server sends welcome message to client when it connects [clark]
 
 **Mar.9th**
 
@@ -45,43 +49,47 @@ After the server is running, connect a client using `./src/musicftp-client`
 
 ## Functionality
 
-#### shutdown
+#### List songs
 
-- [ ] Shutdown server
-
-#### disconnect
-
-- [ ] Disconnect client
-- [ ] Server sends welcome message to client
-- [ ] Client receives welcome message from server
-- [ ] Server launches new thread for each connection accepted
-
-#### list
-
-- [ ] Client sends request to server for list of songs
+- [ ] Client sends request to server for list of songs [High priority]
 - [ ] Server reads list of files from directory
 - [ ] Server sends list of files to the client
 - [ ] Client receives list of available songs
 
-#### download
+#### Download song
 
-- [ ] Client sends name of file to server
+- [ ] Client sends name of file to server [High priority]
 - [ ] Server receives song request
 - [ ] Server checks whether file exists and can be read
 - [ ] Server responds with either the number of bytes in the file or a negative number indicating an error
 - [ ] Server attempts to send requested file to Client
 
-#### search
+#### General
 
-- [ ] Song metadata
-- [ ] Client searches available songs
+- [ ] Allow program to be run when computer does not have an internet connection. Useful for debugging and working offline. [Low priority]
 
-#### stretch functionality
+#### Multiple Clients
 
-- [ ] Server asks client for authentication
-- [ ] Client sends username / password to server
-- [ ] Server checks authentication
-- [ ] Play/launch song from client
+- [ ] Server launches new thread for each connection accepted [Mid priority]
+- [ ] Write code in Server.java that starts ServerSocket.accept() in a new thread
+- [ ] This thread is in charge of doing the normal server/client management stuff (open output/input)
+- [ ] Maintain list of clients (Sockets) in an array for cleanup
+
+#### Search songs
+
+- [ ] Parse song metadata (artist, song, album, length) for searching [Mid priority]
+- [ ] Allow client to search song list [Mid priority]
+
+#### Cleanup
+
+- [ ] Shutdown server/client without exceptions [low priority]
+- [ ] Exceptions are being thrown because the Socket is being closed without the stream being closed first
+- [ ] The cheap way to fix this is to remove the print messages
+
+#### Extras
+
+- [ ] Play or launch song from client [mid priority]
+- [ ] Authentication between client and server [low priority]
 
 ## Detailed Description
 
