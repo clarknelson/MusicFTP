@@ -4,6 +4,8 @@ import main.Util;
 import main.SocketListener;
 import main.ConsoleListener;
 
+import client.ClientQueue;
+
 // connection packages
 import java.net.Socket;
 import java.net.InetAddress;
@@ -21,17 +23,15 @@ import java.io.BufferedReader;
 
 public class Client {
 
-	private Socket SOCKET = null;
 	private InetAddress HOSTNAME = null;
 	private int PORT_NUMBER = 3000;
+	private Socket SOCKET = null;
+	private DataOutputStream CLIENT_OUT = null;
+	private ClientQueue MESSAGES = null;
 
-	public DataOutputStream CLIENT_OUT = null;
 
 	public Client(String[] args){
-		System.out.println("Starting client...");
-
 		if(args.length <= 1){
-			// user did not supply any additional parameters
 			Util.printMsg("Optional arguments: -h=[hostname] -p=[port-number]");
 		}
 
@@ -119,7 +119,8 @@ public class Client {
 
 	private void openInputFromServer(){
 		try{
-			SocketListener server = new SocketListener(this.SOCKET);
+			this.MESSAGES = new ClientQueue(this.SOCKET);
+			SocketListener server = new SocketListener(this.SOCKET, this.MESSAGES);
 			Thread serverThread = new Thread(server);
 			serverThread.start();
 		} catch (Exception e){
@@ -131,8 +132,8 @@ public class Client {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
 				try{
-					CLIENT_OUT.writeUTF("shutdown");
-					SOCKET.close();
+					//CLIENT_OUT.writeUTF("shutdown");
+					//SOCKET.close();
 				} catch (Exception e) {
 					Util.catchException("Could not close sockets", e);
 				}

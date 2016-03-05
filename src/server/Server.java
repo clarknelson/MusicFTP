@@ -4,6 +4,8 @@ import main.Util;
 import main.SocketListener;
 import main.ConsoleListener;
 
+import server.ServerQueue;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -24,17 +26,14 @@ import musicManager.MusicManager;
 
 public class Server {
 
+	private int PORT_NUMBER = 3000;
 	private ServerSocket SERVER = null;
 	private Socket CLIENT = null;
-	private int PORT_NUMBER = 3000;
-
 	private DataOutputStream SERVER_OUT = null;
+	private ServerQueue MESSAGES = null;
 
 	public Server(String[] args){
-		Util.printMsg("Starting server...");
-
 		if(args.length <= 1){
-			// user did not supply any additional arguemets
 			Util.printMsg("Optional arguments: -p=[port-number]");
 		}
 
@@ -82,7 +81,6 @@ public class Server {
 			// Program locks up while waiting for a client
 			this.CLIENT = this.SERVER.accept();
 			Util.printMsg("Server connected to client...");
-			//Util.printMsg(this.SERVER.isBound());
 
 			//MusicManager.getSongs(); -> String[]
 		} catch (Exception e) {
@@ -93,6 +91,7 @@ public class Server {
 	private void openOutputToClient(){
 		try{
 			this.SERVER_OUT = new DataOutputStream(this.CLIENT.getOutputStream());
+			this.SERVER_OUT.writeUTF("welcome");
 		} catch (Exception e) {
 			Util.catchException("Could not open output to client", e);
 		}
@@ -110,7 +109,8 @@ public class Server {
 	}
 	private void openInputFromClient(){
 		try{
-			SocketListener client = new SocketListener(this.CLIENT);
+			this.MESSAGES = new ServerQueue(this.CLIENT);
+			SocketListener client = new SocketListener(this.CLIENT, this.MESSAGES);
 			Thread clientThread = new Thread(client);
 			clientThread.start();
 		} catch (Exception e) {
@@ -122,9 +122,9 @@ public class Server {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
 				try{
-					SERVER_OUT.writeUTF("shutdown");
-					CLIENT.close();
-					SERVER.close();
+					//SERVER_OUT.writeUTF("shutdown");
+					//CLIENT.close();
+					//SERVER.close();
 				} catch (Exception e) {
 					Util.catchException("Could not close sockets", e);
 				}
