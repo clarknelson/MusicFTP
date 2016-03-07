@@ -67,14 +67,14 @@ public class Client {
 				Util.catchException("Could not parse hostname", e);
 			}
 		}
-		Util.printMsg("Set hostname to: " + this.HOSTNAME.getHostName());
+		//Util.printMsg("Set hostname to: " + this.HOSTNAME.getHostName());
 	}
 
 	private void parsePortNumber(String port){
 		try{
 			int portInt = Integer.parseInt(port);
 			this.PORT_NUMBER = portInt;
-			Util.printMsg("Set port number to: " + this.PORT_NUMBER);
+			//Util.printMsg("Set port number to: " + this.PORT_NUMBER);
 		} catch (Exception e) {
 			Util.catchException("Can not parse port number", e);
 		}
@@ -83,7 +83,6 @@ public class Client {
 	private void connectToServer(){
 		try{
 			this.SOCKET = new Socket(this.HOSTNAME, this.PORT_NUMBER);
-			Util.printMsg("Connected to server...");
 		} catch (Exception e){
 			Util.catchException("Could not open socket to server", e);
 		}
@@ -92,7 +91,6 @@ public class Client {
 	private void openOutputToServer(){
 		try{
 			this.CLIENT_OUT = new DataOutputStream(this.SOCKET.getOutputStream());
-			this.CLIENT_OUT.writeUTF("list");
 		} catch (Exception e){
 			Util.catchException("Could not open output stream to server", e);
 		}

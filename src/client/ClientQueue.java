@@ -4,6 +4,7 @@ import main.MessageQueue;
 import main.Util;
 
 import java.net.Socket;
+import java.net.InetAddress;
 
 import java.io.DataOutputStream;
 
@@ -24,15 +25,17 @@ public class ClientQueue extends MessageQueue {
     public void add(String message){
         //Util.printMsg("New message in client queue: " + message);
         switch(message){
+            case("welcome"):
+                printServerInformation();
+                printWelcomeMessage();
+                break;
             case("connected to server"):
                 askForSongList();
                 break;
             case("shutdown"):
                 closeConnection();
                 break;
-            case("welcome"):
-                printWelcomeMessage();
-                break;
+
             default:
                 Util.printMsg(message);
         }
@@ -46,11 +49,16 @@ public class ClientQueue extends MessageQueue {
     }
     private void askForSongList(){
         try{
-            Util.printMsg("connected to the server, asking for a song list");
             this.server.writeUTF("list");
         } catch (Exception e){
             Util.catchException(e);
         }
+    }
+    private void printServerInformation(){
+        int port = this.socket.getLocalPort();
+        InetAddress ia = this.socket.getInetAddress();
+        String host = ia.getHostName();
+        Util.printMsg("Connected to server on " + host + " port " + port);
     }
     private void printWelcomeMessage(){
         Util.printMsg("--------------------------------------------------");
