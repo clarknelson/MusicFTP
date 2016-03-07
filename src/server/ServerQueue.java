@@ -6,14 +6,21 @@ import main.MusicManager;
 
 import java.net.Socket;
 
-
+import java.io.DataOutputStream;
 
 public class ServerQueue extends MessageQueue {
 
     Socket socket;
+    DataOutputStream client;
 
     public ServerQueue(Socket s){
         this.socket = s;
+        try{
+            this.client = new DataOutputStream(this.socket.getOutputStream());
+            this.client.writeUTF("hello client from server");
+        } catch (Exception e) {
+            Util.catchException("Could not open output to server in server queue", e);
+        }
     }
     public void add(String message){
         switch(message){

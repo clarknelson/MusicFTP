@@ -36,8 +36,6 @@ public class Server {
 
 		openInputFromTerminal();
 		openInputFromClient();
-
-		addShutdownHook();
 	}
 
 	private void parseArgument(String arg){
@@ -83,7 +81,6 @@ public class Server {
 		} catch (Exception e) {
 			Util.catchException("Could not open output to client", e);
 		}
-
 	}
 
 	private void openInputFromTerminal(){
@@ -104,19 +101,5 @@ public class Server {
 		} catch (Exception e) {
 			Util.catchException("Could not start client listener thread", e);
 		}
-	}
-
-	private void addShutdownHook(){
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			public void run() {
-				try{
-					//SERVER_OUT.writeUTF("shutdown");
-					//CLIENT.close();
-					//SERVER.close();
-				} catch (Exception e) {
-					Util.catchException("Could not close sockets", e);
-				}
-			}
-	 	});
 	}
 }

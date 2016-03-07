@@ -117,17 +117,4 @@ public class Client {
 			Util.catchException("Can not open thread to listen to server", e);
 		}
 	}
-
-	private void addShutdownHook(){
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			public void run() {
-				try{
-					//CLIENT_OUT.writeUTF("shutdown");
-					//SOCKET.close();
-				} catch (Exception e) {
-					Util.catchException("Could not close sockets", e);
-				}
-			}
-	 	});
-	}
 }
