@@ -7,7 +7,8 @@ public class MessageQueue{
 
     protected Socket socket;
     protected DataOutputStream output;
-    public MessageQueue(Socket s){
+    
+    protected MessageQueue(Socket s){
         this.socket = s;
         try{
             this.output = new DataOutputStream(this.socket.getOutputStream());
@@ -16,7 +17,7 @@ public class MessageQueue{
         }
     }
 
-    public void add(String message){
+    protected void add(String message){
         switch(message){
             case("shutdown"):
                 closeConnection();

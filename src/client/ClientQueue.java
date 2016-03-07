@@ -16,7 +16,6 @@ public class ClientQueue extends MessageQueue {
 
     public void add(String message){
         //Util.printMsg("New message in client queue: " + message);
-
         switch(message){
             case("welcome"):
                 printServerInformation();
@@ -29,7 +28,6 @@ public class ClientQueue extends MessageQueue {
                 super.add(message);
                 break;
         }
-
     }
 
     private void askForSongList(){
@@ -39,12 +37,14 @@ public class ClientQueue extends MessageQueue {
             Util.catchException(e);
         }
     }
+
     private void printServerInformation(){
         int port = this.socket.getLocalPort();
         InetAddress ia = this.socket.getInetAddress();
         String host = ia.getHostName();
         Util.printMsg("Connected to server on " + host + " port " + port);
     }
+
     private void printWelcomeMessage(){
         Util.printMsg("--------------------------------------------------");
         Util.printMsg("------------- WELCOME TO MUSICFTP ----------------");

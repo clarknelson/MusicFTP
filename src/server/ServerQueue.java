@@ -10,7 +10,6 @@ import java.net.InetAddress;
 
 public class ServerQueue extends MessageQueue {
 
-
     public ServerQueue(Socket s){
         super(s);
         print("connected to server");

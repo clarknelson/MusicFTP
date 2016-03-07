@@ -31,9 +31,7 @@ public class Client {
 		for(int i=1; i<args.length; i++){
 			handleArgument(args[i]);
 		}
-
 		connectToServer();
-
 		openInputFromTerminal();
 		openInputFromServer();
 	}
