@@ -2,13 +2,16 @@ package main;
 
 import java.io.File;
 
+
+// lets get some metadata!
+// http://www.fightingquaker.com/myid3/
+
 public class MusicManager {
 
 	public static String[] getSongs()
 	{
-		File folder = new File(".." + File.separator + "src" + File.separator + "songs");
+		File folder = new File("../src/songs");
 		File[] files = folder.listFiles();
-		System.out.println(files);
 		String[] titles =  new String[files.length];
 
 		int count = 0;

@@ -6,20 +6,10 @@ import main.ConsoleListener;
 
 import client.ClientQueue;
 
-// connection packages
 import java.net.Socket;
 import java.net.InetAddress;
 
-// open output from server
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.io.DataOutputStream;
-
-// open input from server
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-
 
 public class Client {
 
