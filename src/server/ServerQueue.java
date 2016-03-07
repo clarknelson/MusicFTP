@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.InetAddress;
 
 import java.io.DataOutputStream;
-
+import java.io.IOException;
 public class ServerQueue extends MessageQueue {
 
     Socket socket;
@@ -34,7 +34,8 @@ public class ServerQueue extends MessageQueue {
                 break;
             case("list"):
                 Util.printMsg("Client is asking for a list of songs");
-                MusicManager.getSongs();
+		getSongs();
+		//                MusicManager.getSongs();
                 break;
             default:
                 Util.printMsg(message);
@@ -54,5 +55,32 @@ public class ServerQueue extends MessageQueue {
         } catch (Exception e){
             Util.catchException("Could not close socket in server", e);
         }
+    }
+    
+    private void getSongs()
+    {
+    
+	String[] songNames = MusicManager.getSongs();
+	Util.printMsg("Server: Number of songs: " + songNames.length);
+	try
+	    {
+		client.writeUTF(Integer.toString(songNames.length));
+	    }
+	catch (IOException e)
+	    {
+		Util.printMsg("Error writing song list length to client.");
+	    }
+	for (String s : songNames)
+	    {
+		try
+		    {
+			client.writeUTF(s);
+		    }
+		catch (IOException e)
+		    {
+			Util.printMsg("Error writing " + e + " to client.");
+		    }
+	    }
+
     }
 }
