@@ -8,6 +8,9 @@ import java.net.Socket;
 import java.net.InetAddress;
 
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class ServerQueue extends MessageQueue {
 
     public ServerQueue(Socket s){
@@ -24,7 +27,8 @@ public class ServerQueue extends MessageQueue {
                 break;
             case("list"):
                 Util.printMsg("Client is asking for a list of songs");
-                MusicManager.getSongs();
+                getSongs();
+                //MusicManager.getSongs();
                 break;
             default:
                 super.add(message);
@@ -37,5 +41,22 @@ public class ServerQueue extends MessageQueue {
         InetAddress ia = this.socket.getInetAddress();
         String host = ia.getHostName();
         Util.printMsg("New client connected from " + host + " on port " + port);
+    }
+
+    private void getSongs(){
+        String[] songNames = MusicManager.getSongs();
+        Util.printMsg("Server: Number of songs: " + songNames.length);
+        try {
+            this.output.writeUTF(Integer.toString(songNames.length));
+        } catch (IOException e) {
+            Util.catchException("Error writing song list length to client.", e);
+        }
+        for (String s : songNames) {
+            try {
+                this.output.writeUTF(s);
+            } catch (IOException e) {
+                Util.catchException("Error writing to client.", e);
+            }
+        }
     }
 }

@@ -7,6 +7,9 @@ import java.net.Socket;
 import java.net.InetAddress;
 
 
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
+
 public class ClientQueue extends MessageQueue {
 
     public ClientQueue(Socket s){
@@ -33,6 +36,13 @@ public class ClientQueue extends MessageQueue {
     private void askForSongList(){
         try{
             this.output.writeUTF("list");
+            DataInputStream input = new DataInputStream (this.socket.getInputStream());
+            String numSongs = input.readUTF();
+            Util.printMsg("Number of songs in directory: " + numSongs);
+            int numSongsInt = Integer.parseInt(numSongs);
+            for (int i = 0; i < numSongsInt; i++) {
+                Util.printMsg(input.readUTF());
+            }
         } catch (Exception e){
             Util.catchException(e);
         }
