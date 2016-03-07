@@ -1,7 +1,7 @@
 package client;
 
 import main.MessageQueue;
-import main.Util;
+import util.Util;
 
 import java.net.Socket;
 import java.net.InetAddress;

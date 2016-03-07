@@ -1,5 +1,7 @@
 package main;
 
+import util.Util;
+
 import java.net.Socket;
 import java.io.DataOutputStream;
 
@@ -7,7 +9,7 @@ public class MessageQueue{
 
     protected Socket socket;
     protected DataOutputStream output;
-    
+
     protected MessageQueue(Socket s){
         this.socket = s;
         try{

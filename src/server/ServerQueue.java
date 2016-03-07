@@ -1,8 +1,8 @@
 package server;
 
 import main.MessageQueue;
-import main.Util;
-import main.MusicManager;
+import util.Util;
+import util.MusicManager;
 
 import java.net.Socket;
 import java.net.InetAddress;

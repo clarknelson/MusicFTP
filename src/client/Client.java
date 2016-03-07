@@ -1,6 +1,6 @@
 package client;
 
-import main.Util;
+import util.Util;
 import main.SocketListener;
 import main.ConsoleListener;
 

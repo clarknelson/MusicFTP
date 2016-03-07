@@ -1,6 +1,6 @@
 package server;
 
-import main.Util;
+import util.Util;
 import main.SocketListener;
 import main.ConsoleListener;
 
@@ -70,8 +70,6 @@ public class Server {
 
 			// Program locks up while waiting for a client
 			this.CLIENT = this.SERVER.accept();
-
-			//MusicManager.getSongs(); -> String[]
 		} catch (Exception e) {
 			Util.catchException("Can not open socket", e);
 		}
