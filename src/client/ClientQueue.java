@@ -19,30 +19,40 @@ public class ClientQueue extends MessageQueue {
 
     public void add(String message){
         //Util.printMsg("New message in client queue: " + message);
-        switch(message){
-            case("welcome"):
-                printServerInformation();
-                printWelcomeMessage();
-                break;
-            case("connected to server"):
-                askForSongList();
-                break;
-            default:
-                super.add(message);
-                break;
+
+        if(message.equals("welcome")){
+            printServerInformation();
+            printWelcomeMessage();
+            return;
         }
+        if(message.equals("connected to server")){
+            askForSongList();
+            return;
+        }
+        if(message.equals("list")){
+            askForSongList();
+            return;
+        }
+        super.add(message);
     }
 
     private void askForSongList(){
         try{
             this.output.writeUTF("list");
+
+            // we dont need to add an input stream here
+            // we dont even have to explicitly listen and catch the songs
+            // the input from the stream is sent to the "add()" method in this class
+            // unless its a command, the text will trickle down to a Util.printMsg()
+
+            /*
             DataInputStream input = new DataInputStream (this.socket.getInputStream());
             String numSongs = input.readUTF();
             Util.printMsg("Number of songs in directory: " + numSongs);
             int numSongsInt = Integer.parseInt(numSongs);
             for (int i = 0; i < numSongsInt; i++) {
                 Util.printMsg(input.readUTF());
-            }
+            }*/
         } catch (Exception e){
             Util.catchException(e);
         }
@@ -56,12 +66,13 @@ public class ClientQueue extends MessageQueue {
     }
 
     private void printWelcomeMessage(){
-        Util.printMsg("--------------------------------------------------");
+        Util.printMsg("==================================================");
         Util.printMsg("------------- WELCOME TO MUSICFTP ----------------");
-        Util.printMsg("--------------------------------------------------");
+        Util.printMsg("==================================================");
         Util.printMsg("Available commands:");
-        Util.printMsg("  shutdown : disconnects client from server");
-        Util.printMsg("--------------------------------------------------");
+        Util.printMsg("  shutdown - ends client and server program");
+        Util.printMsg("  list - prints the available songs on the server");
+        Util.printMsg("==================================================");
 
     }
 }

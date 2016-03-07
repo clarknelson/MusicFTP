@@ -26,9 +26,7 @@ public class ServerQueue extends MessageQueue {
                 printClientInformation();
                 break;
             case("list"):
-                Util.printMsg("Client is asking for a list of songs");
-                getSongs();
-                //MusicManager.getSongs();
+                getSongList();
                 break;
             default:
                 super.add(message);
@@ -43,20 +41,13 @@ public class ServerQueue extends MessageQueue {
         Util.printMsg("New client connected from " + host + " on port " + port);
     }
 
-    private void getSongs(){
+    private void getSongList(){
         String[] songNames = MusicManager.getSongs();
         Util.printMsg("Server: Number of songs: " + songNames.length);
-        try {
-            this.output.writeUTF(Integer.toString(songNames.length));
-        } catch (IOException e) {
-            Util.catchException("Error writing song list length to client.", e);
-        }
+        print("Number of songs: " + songNames.length);
+
         for (String s : songNames) {
-            try {
-                this.output.writeUTF(s);
-            } catch (IOException e) {
-                Util.catchException("Error writing to client.", e);
-            }
+            print(s);
         }
     }
 }
