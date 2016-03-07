@@ -6,24 +6,17 @@ import main.Util;
 import java.net.Socket;
 import java.net.InetAddress;
 
-import java.io.DataOutputStream;
 
 public class ClientQueue extends MessageQueue {
 
-    Socket socket;
-    DataOutputStream server;
     public ClientQueue(Socket s){
-        this.socket = s;
-        try{
-            this.server = new DataOutputStream(this.socket.getOutputStream());
-            this.server.writeUTF("connected to client");
-        } catch (Exception e) {
-            Util.catchException("Could not open output to server in client queue", e);
-        }
+        super(s);
+        print("connected to client");
     }
 
     public void add(String message){
         //Util.printMsg("New message in client queue: " + message);
+
         switch(message){
             case("welcome"):
                 printServerInformation();
@@ -32,24 +25,16 @@ public class ClientQueue extends MessageQueue {
             case("connected to server"):
                 askForSongList();
                 break;
-            case("shutdown"):
-                closeConnection();
-                break;
-
             default:
-                Util.printMsg(message);
+                super.add(message);
+                break;
         }
+
     }
-    private void closeConnection(){
-        try{
-            this.socket.close();
-        } catch (Exception e){
-            Util.catchException("Could not close socket in client", e);
-        }
-    }
+
     private void askForSongList(){
         try{
-            this.server.writeUTF("list");
+            this.output.writeUTF("list");
         } catch (Exception e){
             Util.catchException(e);
         }
