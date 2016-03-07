@@ -1,4 +1,4 @@
-package musicManager;
+package main;
 
 import java.io.File;
 

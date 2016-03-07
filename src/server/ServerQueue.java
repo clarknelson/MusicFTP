@@ -2,8 +2,11 @@ package server;
 
 import main.MessageQueue;
 import main.Util;
+import main.MusicManager;
 
 import java.net.Socket;
+
+
 
 public class ServerQueue extends MessageQueue {
 
@@ -17,8 +20,12 @@ public class ServerQueue extends MessageQueue {
             case("shutdown"):
                 closeConnection();
                 break;
+            case("list"):
+                MusicManager.getSongs();
+                break;
             default:
                 Util.printMsg(message);
+                break;
         }
     }
 

@@ -21,9 +21,6 @@ import java.io.BufferedReader;
 
 import java.net.InetAddress;
 
-//Get songs
-import musicManager.MusicManager;
-
 public class Server {
 
 	private int PORT_NUMBER = 3000;

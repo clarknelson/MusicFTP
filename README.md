@@ -11,11 +11,6 @@ From MusicFTP folder run `./src/musicftp-server`
 
 After the server is running, connect a client using `./src/musicftp-client`
 
-## General Todos
-
-
-- [ ] JSON config file to store connection information, approved users, etc
-
 ## Timeline
 
 **Feb.27th**
@@ -49,6 +44,11 @@ After the server is running, connect a client using `./src/musicftp-client`
 
 ## Functionality
 
+#### General
+
+- [ ] Support a JSON config file to store authentication information, song directory, song information, etc [Mid priority]
+- [ ] Allow program to be run when computer does not have an internet connection. Useful for debugging and working offline. [Low priority]
+
 #### List songs
 
 - [ ] Client sends request to server for list of songs [High priority]
@@ -63,10 +63,6 @@ After the server is running, connect a client using `./src/musicftp-client`
 - [ ] Server checks whether file exists and can be read
 - [ ] Server responds with either the number of bytes in the file or a negative number indicating an error
 - [ ] Server attempts to send requested file to Client
-
-#### General
-
-- [ ] Allow program to be run when computer does not have an internet connection. Useful for debugging and working offline. [Low priority]
 
 #### Multiple Clients
 
