@@ -32,7 +32,10 @@ After the server is running, connect a client using `./src/musicftp-client`
 - [X] Convert BufferedReader and PrintWriter to DataInputStream and DataOutputStream [clark]
 - [X] Added ClientQueue and ServerQueue classes to manage messages sent from the other end [clark]
 - [X] Server and client recognize shutdown messages and close the socket [clark]
-- [X] Server sends welcome message to client when it connects [clark]
+
+**Mar.7th**
+
+- [X] Server and Client send welcome messages and print connection information
 
 **Mar.9th**
 
