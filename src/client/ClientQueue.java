@@ -6,24 +6,20 @@ import main.Util;
 import java.net.Socket;
 import java.net.InetAddress;
 
+
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+
 public class ClientQueue extends MessageQueue {
 
-    Socket socket;
-    DataOutputStream server;
     public ClientQueue(Socket s){
-        this.socket = s;
-        try{
-            this.server = new DataOutputStream(this.socket.getOutputStream());
-            this.server.writeUTF("connected to client");
-        } catch (Exception e) {
-            Util.catchException("Could not open output to server in client queue", e);
-        }
+        super(s);
+        print("connected to client");
     }
 
     public void add(String message){
         //Util.printMsg("New message in client queue: " + message);
+
         switch(message){
             case("welcome"):
                 printServerInformation();
@@ -32,23 +28,16 @@ public class ClientQueue extends MessageQueue {
             case("connected to server"):
                 askForSongList();
                 break;
-            case("shutdown"):
-                closeConnection();
-                break;
-
             default:
-                Util.printMsg(message);
+                super.add(message);
+                break;
         }
+
     }
-    private void closeConnection(){
-        try{
-            this.socket.close();
-        } catch (Exception e){
-            Util.catchException("Could not close socket in client", e);
-        }
-    }
+
     private void askForSongList(){
         try{
+<<<<<<< HEAD
             this.server.writeUTF("list");
 	    DataInputStream input = new DataInputStream (this.socket.getInputStream());
 	    String numSongs = input.readUTF();
@@ -58,6 +47,9 @@ public class ClientQueue extends MessageQueue {
 		{
 		    Util.printMsg(input.readUTF());
 		}
+=======
+            this.output.writeUTF("list");
+>>>>>>> b03f86a44d5b078918264503ae7d003d635a5a73
         } catch (Exception e){
             Util.catchException(e);
         }
