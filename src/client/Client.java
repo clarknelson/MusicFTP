@@ -92,6 +92,7 @@ public class Client {
 	private void openOutputToServer(){
 		try{
 			this.CLIENT_OUT = new DataOutputStream(this.SOCKET.getOutputStream());
+			this.CLIENT_OUT.writeUTF("list");
 		} catch (Exception e){
 			Util.catchException("Could not open output stream to server", e);
 		}

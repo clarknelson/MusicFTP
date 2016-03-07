@@ -56,6 +56,10 @@ public class Server {
 		}
 	}
 
+	/** This should be abstracted into a thread
+		So we can connect multiple clients
+		The ServerSocket will need to be continuously listening
+	*/
 	private void startServer(){
 		try{
 			// ServerSocket can take one extra parameter:
@@ -66,7 +70,6 @@ public class Server {
 
 			// Program locks up while waiting for a client
 			this.CLIENT = this.SERVER.accept();
-			Util.printMsg("Server connected to client...");
 
 			//MusicManager.getSongs(); -> String[]
 		} catch (Exception e) {
