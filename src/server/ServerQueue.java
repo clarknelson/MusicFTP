@@ -1,6 +1,6 @@
 package server;
 
-import main.MessageQueue;
+import util.MessageQueue;
 import util.Util;
 import util.MusicManager;
 

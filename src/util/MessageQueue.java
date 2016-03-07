@@ -1,6 +1,4 @@
-package main;
-
-import util.Util;
+package util;
 
 import java.net.Socket;
 import java.io.DataOutputStream;
@@ -19,7 +17,7 @@ public class MessageQueue{
         }
     }
 
-    protected void add(String message){
+    public void add(String message){
         switch(message){
             case("shutdown"):
                 closeConnection();

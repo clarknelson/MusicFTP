@@ -1,6 +1,7 @@
 package main;
 
 import util.Util;
+import util.MessageQueue;
 
 import java.net.Socket;
 import java.io.DataInputStream;

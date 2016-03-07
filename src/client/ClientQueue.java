@@ -1,6 +1,6 @@
 package client;
 
-import main.MessageQueue;
+import util.MessageQueue;
 import util.Util;
 
 import java.net.Socket;
