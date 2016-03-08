@@ -3,6 +3,7 @@ package util;
 import java.net.Socket;
 import java.io.DataOutputStream;
 
+// client.ClientQueue and server.ServerQueue both inherit this functionality
 public class MessageQueue{
 
     protected Socket socket;

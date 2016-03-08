@@ -7,7 +7,6 @@ import util.MusicManager;
 import java.net.Socket;
 import java.net.InetAddress;
 
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -42,12 +41,13 @@ public class ServerQueue extends MessageQueue {
     }
 
     private void getSongList(){
-        String[] songNames = MusicManager.getSongs();
+        MusicManager mm = new MusicManager();
+        String[] songNames = mm.getSongs("../src/songs");
         Util.printMsg("Server: Number of songs: " + songNames.length);
         print("Number of songs: " + songNames.length);
 
         for (String s : songNames) {
-            print(s);
+            //print(s);
         }
     }
 }
