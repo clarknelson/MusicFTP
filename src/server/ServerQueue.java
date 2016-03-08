@@ -11,15 +11,16 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class ServerQueue extends MessageQueue {
+    MusicManager music;
 
     public ServerQueue(Socket s){
         super(s);
         print("connected to server");
+        music = new MusicManager("../src/songs");
     }
 
     public void add(String message){
         //Util.printMsg("New message in server queue: " + message);
-
         switch(message){
             case("connected to client"):
                 printClientInformation();
@@ -41,13 +42,7 @@ public class ServerQueue extends MessageQueue {
     }
 
     private void getSongList(){
-        MusicManager mm = new MusicManager();
-        String[] songNames = mm.getSongs("../src/songs");
-        Util.printMsg("Server: Number of songs: " + songNames.length);
-        print("Number of songs: " + songNames.length);
-
-        for (String s : songNames) {
-            //print(s);
-        }
+        int songCount = music.getNumberOfSongs();
+        print("Number of songs available for download: " + Integer.toString(songCount));
     }
 }
