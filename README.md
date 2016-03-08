@@ -35,7 +35,14 @@ After the server is running, connect a client using `./src/musicftp-client`
 
 **Mar.7th**
 
-- [X] Server and Client send welcome messages and print connection information
+- [X] Server and Client send welcome messages and print connection information [clark]
+- [X] Basic listing for files [eleanor]
+- [X] Add metadata library [clark]
+
+**Mar.8th**
+
+- [X] Write Song class to pull and store metadata [clark]
+- [X] Write "list artists" command [clark]
 
 **Mar.9th**
 
