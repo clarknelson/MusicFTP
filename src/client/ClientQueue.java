@@ -17,45 +17,29 @@ public class ClientQueue extends MessageQueue {
         print("connected to client");
     }
 
+
+    /* INCOMMING MESSAGES FROM THE SERVER */
     public void add(String message){
         //Util.printMsg("New message in client queue: " + message);
-
         if(message.equals("welcome")){
             printServerInformation();
             printWelcomeMessage();
+            printUsage();
             return;
         }
         if(message.equals("connected to server")){
-            askForSongList();
+            //askForSongList();
+            return;
+        }
+        if(message.equals("help")){
+            printUsage();
             return;
         }
         if(message.equals("list")){
-            askForSongList();
+            print("list");
             return;
         }
         super.add(message);
-    }
-
-    private void askForSongList(){
-        try{
-            this.output.writeUTF("list");
-
-            // we dont need to add an input stream here
-            // we dont even have to explicitly listen and catch the songs
-            // the input from the stream is sent to the "add()" method in this class
-            // unless its a command, the text will trickle down to a Util.printMsg()
-
-            /*
-            DataInputStream input = new DataInputStream (this.socket.getInputStream());
-            String numSongs = input.readUTF();
-            Util.printMsg("Number of songs in directory: " + numSongs);
-            int numSongsInt = Integer.parseInt(numSongs);
-            for (int i = 0; i < numSongsInt; i++) {
-                Util.printMsg(input.readUTF());
-            }*/
-        } catch (Exception e){
-            Util.catchException(e);
-        }
     }
 
     private void printServerInformation(){
@@ -68,11 +52,21 @@ public class ClientQueue extends MessageQueue {
     private void printWelcomeMessage(){
         Util.printMsg("==================================================");
         Util.printMsg("------------- WELCOME TO MUSICFTP ----------------");
+    }
+    private void printUsage(){
         Util.printMsg("==================================================");
-        Util.printMsg("Available commands:");
-        Util.printMsg("  shutdown - ends client and server program");
-        Util.printMsg("  list - prints the available songs on the server");
+        Util.printMsg("Program commands:");
+        Util.printMsg("    [help] - prints this message");
+        Util.printMsg("    [shutdown] - ends client and server program");
+        Util.printMsg("List commands:");
+        Util.printMsg("    [list] - prints all songs on the server");
+        Util.printMsg("    [list artists] - prints all artists available");
+        Util.printMsg("    [list artist <asdf>] - prints songs by artist");
+        Util.printMsg("    [list song] - prints all songs available");
+        Util.printMsg("    [list song <asdf>] - prints songs named asdf");
+        Util.printMsg("Download commands:");
+        Util.printMsg("    search works the same as list command");
+        Util.printMsg("    [download artist Bassnectar]");
         Util.printMsg("==================================================");
-
     }
 }

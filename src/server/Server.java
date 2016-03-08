@@ -93,6 +93,7 @@ public class Server {
 			Util.catchException("Could not start console listener thread", e);
 		}
 	}
+
 	private void openInputFromClient(){
 		try{
 			this.MESSAGES = new ServerQueue(this.CLIENT);

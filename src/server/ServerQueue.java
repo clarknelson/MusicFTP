@@ -19,6 +19,7 @@ public class ServerQueue extends MessageQueue {
         music = new MusicManager("../src/songs");
     }
 
+    /* INCOMMING MESSAGES FROM CLIENT */
     public void add(String message){
         //Util.printMsg("New message in server queue: " + message);
         switch(message){
@@ -27,6 +28,15 @@ public class ServerQueue extends MessageQueue {
                 break;
             case("list"):
                 getSongList();
+                // print the usage again
+                // print("help");
+                break;
+            case("list artists"):
+                getListOfArtists();
+                break;
+            case("help"):
+                // client is asking for usage
+                print("help");
                 break;
             default:
                 super.add(message);
@@ -41,8 +51,21 @@ public class ServerQueue extends MessageQueue {
         Util.printMsg("New client connected from " + host + " on port " + port);
     }
 
-    private void getSongList(){
+    private void getNumberOfSongs(){
         int songCount = music.getNumberOfSongs();
         print("Number of songs available for download: " + Integer.toString(songCount));
+    }
+
+    private void getListOfArtists(){
+        String[] artists = music.getArtistList();
+        for(int i=0; i<artists.length; i++){
+            print(artists[i]);
+        }
+    }
+    private void getSongList(){
+        String[] songs = music.getSongs();
+        for(int i=0; i<songs.length; i++){
+            print(songs[i]);
+        }
     }
 }
