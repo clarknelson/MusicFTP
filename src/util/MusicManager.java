@@ -15,6 +15,7 @@ public class MusicManager {
 		parseDirectory(this.directory);
 	}
 
+	/** Populates the songs ArrayList with created Song */
 	private void parseDirectory(String directory){
 		File folder = new File(directory);
 		File[] files = folder.listFiles();
@@ -37,7 +38,20 @@ public class MusicManager {
 		}
 	}
 
-	public String[] getSongs(){
+	public void download(String query){
+		Util.printMsg(query);
+	}
+
+	public void downloadSong(String song){
+		Util.printMsg(song);
+	}
+	public void downloadArtist(String artist){
+		Util.printMsg(artist);
+
+	}
+
+	/** Gets a list of filenames */
+	public String[] getFileNames(){
 		String[] titles = new String[songs.size()];
 
 		int count = 0;
@@ -71,6 +85,30 @@ public class MusicManager {
 			result[i] = artists.get(i) + " - " + songCount.get(i) + " songs";
 		}
 		return result;
+	}
+
+	public String[] getSongsByArtist(String query){
+		ArrayList<String> s = new ArrayList<String>();
+
+		String artistQuery = query.toLowerCase();
+
+		for(Song song : songs){
+			String artist = song.getArtist();
+
+			if(artist != null){
+				if(artist.toLowerCase().equals(artistQuery)){
+					s.add(song.getFileName());
+				}
+			}
+		}
+		String[] answer = new String[s.size()];
+		answer = s.toArray(answer);
+		return answer;
+	}
+
+	public File[] downloadSongsByArtist(String artist){
+		Util.printMsg(artist);
+		return new File[10];
 	}
 
 	public int getNumberOfSongs(){

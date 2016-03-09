@@ -59,13 +59,15 @@ public class ClientQueue extends MessageQueue {
         Util.printMsg("    [shutdown] - ends client and server program");
         Util.printMsg("List commands:");
         Util.printMsg("    [list] - prints all songs on the server");
+        Util.printMsg("    [list files] - same as above");
         Util.printMsg("    [list artists] - prints all artists available");
-        Util.printMsg("    [list artist <asdf>] - prints songs by artist");
-        Util.printMsg("    [list song] - prints all songs available");
-        Util.printMsg("    [list song <asdf>] - prints songs named asdf");
+        Util.printMsg("    [list artist <foobar>] - prints songs by artist");
+        Util.printMsg("    //[list songs] - prints out song names");
+        Util.printMsg("    //[list song <foobar>] - prints songs named asdf");
         Util.printMsg("Download commands:");
-        Util.printMsg("    search works the same as list command");
-        Util.printMsg("    [download artist Bassnectar]");
+        Util.printMsg("    //[download] - downloads all files from the server");
+        Util.printMsg("    //[download song <foobar>] - downloads all files from the server");
+        Util.printMsg("    //[download artist Bassnectar]");
         Util.printMsg("==================================================");
     }
 }

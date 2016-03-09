@@ -9,6 +9,7 @@ import java.net.InetAddress;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.File;
 
 public class ServerQueue extends MessageQueue {
 
@@ -29,11 +30,22 @@ public class ServerQueue extends MessageQueue {
         //print("help") // tell the client to print usage
         if(message.startsWith("list")){
 
-            if(message.startsWith("list artists")){
-                getListOfArtists();
+            if(message.startsWith("list files")){
+                getSongList();
                 return;
             }
+            if(message.startsWith("list artist")){
+                if(message.equals("list artists") || message.equals("list artist")){
+                    getListOfArtists();
+                    return;
+                } else {
+                    String artist = message.substring(12);
+                    getSongsByArtist(artist);
+                    return;
+                }
+            }
             getSongList();
+            return;
         }
 
         if(message.equals("connected to client")){
@@ -47,7 +59,18 @@ public class ServerQueue extends MessageQueue {
         }
 
         if(message.startsWith("download")){
-
+            String query = message.substring(9);
+            if(query.startsWith("artist")){
+                String artist = query.substring(7);
+                downloadArtist(artist);
+                return;
+            }
+            if(query.startsWith("song")){
+                String song = query.substring(5);
+                music.downloadSong(song);
+                return;
+            }
+            return;
         }
         // searches methods in util.MessageQueue
         super.add(message);
@@ -61,26 +84,52 @@ public class ServerQueue extends MessageQueue {
     }
 
     private void printHelp(){
-        // this class is run on the server, and does not have a help menu
-        // we send a message back to the client telling it to print usage
+        // this class is run on the server, which does not have a help menu
+        // we send a message back to the client telling it to print the usage
         print("help");
     }
 
+
+
+
     private void getNumberOfSongs(){
         int songCount = music.getNumberOfSongs();
-        print("Number of songs available for download: " + Integer.toString(songCount));
+        String songCountString = Integer.toString(songCount);
+        print("--------------------------------------------------");
+        print("Number of songs available for download: " + songCountString);
+        print("--------------------------------------------------");
     }
 
     private void getListOfArtists(){
         String[] artists = music.getArtistList();
+        print("--------------------------------------------------");
         for(int i=0; i<artists.length; i++){
             print(artists[i]);
         }
+        print("--------------------------------------------------");
     }
-    private void getSongList(){
-        String[] songs = music.getSongs();
+    
+    private void getSongsByArtist(String artist){
+        String[] songs = music.getSongsByArtist(artist);
+        print("--------------------------------------------------");
         for(int i=0; i<songs.length; i++){
             print(songs[i]);
         }
+        print("--------------------------------------------------");
+    }
+
+    private void getSongList(){
+        String[] songs = music.getFileNames();
+        print("--------------------------------------------------");
+        for(int i=0; i<songs.length; i++){
+            print(songs[i]);
+        }
+        print("--------------------------------------------------");
+    }
+
+
+    private void downloadArtist(String artist){
+        File[] songs = music.downloadSongsByArtist(artist);
+
     }
 }

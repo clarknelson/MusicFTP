@@ -5,14 +5,16 @@ import util.mp3agic.Mp3File;
 import util.mp3agic.ID3v1;
 import util.mp3agic.ID3v2;
 
+import java.io.File;
+
 public class Song {
 
+    File file = null;
+    Mp3File mp3file = null;
     String filename = "";
     String path = "";
-    Mp3File mp3file = null;
     long length = 0;
     int bitrate = 0;
-
     String trackNumber = "";
     String artist = "";
     String title = "";
@@ -33,11 +35,11 @@ public class Song {
 
     private void getMetadata(String pathname){
         try{
-            this.path = pathname;
             this.mp3file = new Mp3File(pathname);
+            this.file = new File(pathname);
+            this.path = pathname;
             this.length = mp3file.getLengthInSeconds();
             this.bitrate = mp3file.getBitrate();
-
             if(mp3file.hasId3v1Tag()){
                 getId3v1Data();
             }
@@ -127,6 +129,9 @@ public class Song {
     public String getGenre(){
         //Util.printMsg(this.genre);
         return this.genre;
+    }
+    public File getFile(){
+        return this.file;
     }
 
     // if you want to be a baws, write public File getAlbumArt()
