@@ -11,6 +11,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class ServerQueue extends MessageQueue {
+
     MusicManager music;
 
     public ServerQueue(Socket s){
@@ -21,27 +22,35 @@ public class ServerQueue extends MessageQueue {
 
     /* INCOMMING MESSAGES FROM CLIENT */
     public void add(String message){
+        // visualize raw client to server messages
         //Util.printMsg("New message in server queue: " + message);
-        switch(message){
-            case("connected to client"):
-                printClientInformation();
-                break;
-            case("list"):
-                getSongList();
-                // print the usage again
-                // print("help");
-                break;
-            case("list artists"):
+
+        // the user might want to see a list of commands after running something
+        //print("help") // tell the client to print usage
+        if(message.startsWith("list")){
+
+            if(message.startsWith("list artists")){
                 getListOfArtists();
-                break;
-            case("help"):
-                // client is asking for usage
-                print("help");
-                break;
-            default:
-                super.add(message);
-                break;
+                return;
+            }
+            getSongList();
         }
+
+        if(message.equals("connected to client")){
+            printClientInformation();
+            return;
+        }
+
+        if(message.equals("help")){
+            printHelp();
+            return;
+        }
+
+        if(message.startsWith("download")){
+
+        }
+        // searches methods in util.MessageQueue
+        super.add(message);
     }
 
     private void printClientInformation(){
@@ -49,6 +58,12 @@ public class ServerQueue extends MessageQueue {
         InetAddress ia = this.socket.getInetAddress();
         String host = ia.getHostName();
         Util.printMsg("New client connected from " + host + " on port " + port);
+    }
+
+    private void printHelp(){
+        // this class is run on the server, and does not have a help menu
+        // we send a message back to the client telling it to print usage
+        print("help");
     }
 
     private void getNumberOfSongs(){

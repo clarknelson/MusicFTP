@@ -92,8 +92,8 @@ public class Client {
 		} catch (Exception e){
 			Util.catchException("Could not open output stream to server", e);
 		}
-
 	}
+
 	private void openInputFromTerminal(){
 		try{
 			ConsoleListener console = new ConsoleListener(System.in, this.SOCKET.getOutputStream());

@@ -61,10 +61,10 @@ After the server is running, connect a client using `./src/musicftp-client`
 
 #### List songs
 
-- [ ] Client sends request to server for list of songs [High priority]
-- [ ] Server reads list of files from directory
-- [ ] Server sends list of files to the client
-- [ ] Client receives list of available songs
+- [X] Client sends request to server for list of songs [High priority]
+- [X] Server reads list of files from directory
+- [X] Server sends list of files to the client
+- [X] Client receives list of available songs
 
 #### Download song
 

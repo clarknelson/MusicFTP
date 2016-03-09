@@ -7,7 +7,7 @@ import util.mp3agic.ID3v2;
 
 public class Song {
 
-    String file = "";
+    String filename = "";
     String path = "";
     Mp3File mp3file = null;
     long length = 0;
@@ -23,18 +23,18 @@ public class Song {
     byte[] albumArt = null;
 
 
-    public Song(String pathname){
-        getMetadata(pathname);
+    public Song(String p){
+        getMetadata(p);
     }
-    public Song(String filename, String pathname){
-        this.file = filename;
-        getMetadata(pathname);
+    public Song(String f, String p){
+        this.filename = f;
+        getMetadata(p);
     }
 
-    private void getMetadata(String filename){
+    private void getMetadata(String pathname){
         try{
-            this.path = filename;
-            this.mp3file = new Mp3File(filename);
+            this.path = pathname;
+            this.mp3file = new Mp3File(pathname);
             this.length = mp3file.getLengthInSeconds();
             this.bitrate = mp3file.getBitrate();
 
@@ -56,13 +56,6 @@ public class Song {
         this.album = id3v1Tag.getAlbum();
         this.year = id3v1Tag.getYear();
         this.genre = id3v1Tag.getGenreDescription();
-        //System.out.println("Track: " + );
-        //System.out.println("Artist: " + );
-        //System.out.println("Title: " + );
-        //System.out.println("Album: " + );
-        //System.out.println("Year: " + );
-        //System.out.println("Genre: " + id3v1Tag.getGenre() + " (" +  + ")");
-        //System.out.println("Comment: " + id3v1Tag.getComment());
     }
     private void getId3v2Data(){
         ID3v2 id3v2Tag = this.mp3file.getId3v2Tag();
@@ -79,6 +72,7 @@ public class Song {
             //System.out.println("Have album image data, length: " + this.albumArt.length + " bytes");
             //System.out.println("Album image mime type: " + id3v2Tag.getAlbumImageMimeType());
         }
+
         // available in Id3v2 but we dont need it
         //System.out.println("Comment: " + id3v2Tag.getComment());
         //System.out.println("Composer: " + id3v2Tag.getComposer());
@@ -91,14 +85,51 @@ public class Song {
     }
 
     public String getFileName(){
-        return this.file;
+        //Util.printMsg(this.filename);
+        return this.filename;
+    }
+    public String getPath(){
+        //Util.printMsg(this.path);
+        return this.path;
+    }
+    /** Returns length of song in seconds */
+    public long getLength(){
+        //Util.printMsg(this.length);
+        return this.length;
+    }
+    /** Returns "quality" of the audio file */
+    public int getBitrate(){
+        //Util.printMsg(this.bitrate);
+        return this.bitrate;
+    }
+    /** Returns the location this song on the album */
+    public String getTrackNumber(){
+        //Util.printMsg(this.trackNumber);
+        return this.trackNumber;
+    }
+
+    public String getArtist(){
+        //Util.printMsg(this.artist);
+        return this.artist;
     }
     public String getTitle(){
         //Util.printMsg(this.title);
         return this.title;
     }
-    public String getArtist(){
-        //Util.printMsg(this.artist);
-        return this.artist;
+    public String getAlbum(){
+        //Util.printMsg(this.album);
+        return this.album;
     }
+    public String getYear(){
+        //Util.printMsg(this.year);
+        return this.year;
+    }
+    public String getGenre(){
+        //Util.printMsg(this.genre);
+        return this.genre;
+    }
+
+    // if you want to be a baws, write public File getAlbumArt()
+    //boolean hasAlbumArt = false;
+    //byte[] albumArt = null;
 }
