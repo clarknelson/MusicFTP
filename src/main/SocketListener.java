@@ -18,17 +18,38 @@ public class SocketListener implements Runnable {
 
     public void run(){
         try(DataInputStream in = new DataInputStream(this.socket.getInputStream())){
-            while((text = in.readUTF()) != null){
-                if(text.startsWith("download filename ")){
-                    // start
+            //boolean downloading = false;
+
+            while(true){
+                long status = in.readLong();
+                //Util.printMsg("New message from other side: " + Long.toString(status));
+                if(status == 1){
+                    String message = in.readUTF();
+                    //Util.printMsg("Recieved message: " + message);
+                    this.messages.add(message);
+                }
+                if(status == 2){
+
+                    String message = in.readUTF();
+                    Util.printMsg("Recieving download: " + message);
+                    //this.messages.add(message);
+                }
+            }
+            /*
+            while((text = in.readUTF()) != null && !downloading){
+                if(text.startsWith("download")){
+                    downloadSomething();
+                    downloading = true;
                 } else {
                     this.messages.add(text);
                 }
-
-
-            }
+            } */
         } catch (Exception e) {
             Util.catchException("Problem reading thread: ", e);
         }
+    }
+
+    private void downloadSomething(){
+        Util.printMsg("we are going to download something");
     }
 }

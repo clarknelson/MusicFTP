@@ -38,6 +38,7 @@ public class MessageQueue{
 
     protected void print(String message){
         try{
+            this.output.writeLong(1);
             this.output.writeUTF(message);
         } catch (Exception e){
             Util.catchException("Could not print message", e);

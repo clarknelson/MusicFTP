@@ -11,6 +11,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import java.io.DataOutputStream;
+import java.io.DataInputStream;
 
 public class Server {
 
@@ -78,6 +79,7 @@ public class Server {
 	private void openOutputToClient(){
 		try{
 			this.SERVER_OUT = new DataOutputStream(this.CLIENT.getOutputStream());
+			this.SERVER_OUT.writeLong(1);
 			this.SERVER_OUT.writeUTF("welcome");
 		} catch (Exception e) {
 			Util.catchException("Could not open output to client", e);
@@ -97,11 +99,27 @@ public class Server {
 	private void openInputFromClient(){
 		try{
 			this.MESSAGES = new ServerQueue(this.CLIENT);
-			SocketListener client = new SocketListener(this.CLIENT, this.MESSAGES);
-			Thread clientThread = new Thread(client);
-			clientThread.start();
-		} catch (Exception e) {
-			Util.catchException("Could not start client listener thread", e);
+			SocketListener server = new SocketListener(this.CLIENT, this.MESSAGES);
+			Thread serverThread = new Thread(server);
+			serverThread.start();
+		} catch (Exception e){
+			Util.catchException("Can not open thread to listen to server", e);
 		}
+		/*
+		String text;
+		this.MESSAGES = new ServerQueue(this.CLIENT);
+		try(DataInputStream in = new DataInputStream(this.CLIENT.getInputStream())){
+
+			while((text = in.readUTF()) != null){
+				if(text.startsWith("download")){
+					Util.printMsg("Download something");
+				} else {
+					this.MESSAGES.add(text);
+				}
+			}
+
+		} catch (Exception e) {
+			Util.catchException("Problem reading thread: ", e);
+		} */
 	}
 }

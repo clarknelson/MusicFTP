@@ -31,7 +31,17 @@ public class ConsoleListener implements Runnable {
         BufferedReader in = new BufferedReader(
         new InputStreamReader(this.stream))){
             while((text = in.readLine()) != null){
-                this.output.writeUTF(text);
+                //Util.printMsg("New message from console: " + text);
+                if(text.startsWith("download")){
+                    //Util.printMsg("Download");
+                    this.output.writeLong(2);
+                    this.output.writeUTF(text);
+                } else {
+                    //Util.printMsg("message trying to be sent: " + text);
+                    this.output.writeLong(1);
+                    this.output.writeUTF(text);
+                }
+                //this.output.writeUTF(text);
             }
         } catch (Exception e) {
             Util.catchException("Problem reading from console: ", e);

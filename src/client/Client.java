@@ -3,6 +3,7 @@ package client;
 import util.Util;
 import main.SocketListener;
 import main.ConsoleListener;
+import main.DownloadThread;
 
 import client.ClientQueue;
 
@@ -10,6 +11,7 @@ import java.net.Socket;
 import java.net.InetAddress;
 
 import java.io.DataOutputStream;
+import java.io.DataInputStream;
 
 public class Client {
 
@@ -34,6 +36,7 @@ public class Client {
 		connectToServer();
 		openInputFromTerminal();
 		openInputFromServer();
+		//openDownloadFromServer();
 	}
 
 	private void handleArgument(String arg){
@@ -112,6 +115,16 @@ public class Client {
 			serverThread.start();
 		} catch (Exception e){
 			Util.catchException("Can not open thread to listen to server", e);
+		}
+	}
+
+	private void openDownloadFromServer(){
+		try{
+			DownloadThread download = new DownloadThread(this.SOCKET);
+			Thread downloadThread = new Thread(download);
+			downloadThread.start();
+		} catch (Exception e){
+			Util.catchException("Can not open download thread", e);
 		}
 	}
 }
