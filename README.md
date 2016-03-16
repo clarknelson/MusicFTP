@@ -42,7 +42,9 @@ After the server is running, connect a client using `./src/musicftp-client`
 **Mar.8th**
 
 - [X] Write Song class to pull and store metadata [clark]
+- [X] Write "list" / "list files" command [clark]
 - [X] Write "list artists" command [clark]
+- [X] Write "list artist bassnectar" command [clark]
 
 **Mar.9th**
 
@@ -83,8 +85,8 @@ After the server is running, connect a client using `./src/musicftp-client`
 
 #### Search songs
 
-- [ ] Parse song metadata (artist, song, album, length) for searching [Mid priority]
-- [ ] Allow client to search song list [Mid priority]
+- [X] Parse song metadata (artist, song, album, length) for searching [Mid priority]
+- [X] Allow client to search song list [Mid priority]
 
 #### Cleanup
 
@@ -96,6 +98,9 @@ After the server is running, connect a client using `./src/musicftp-client`
 
 - [ ] Play or launch song from client [mid priority]
 - [ ] Authentication between client and server [low priority]
+
+
+
 
 ## Detailed Description
 

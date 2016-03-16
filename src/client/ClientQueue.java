@@ -38,6 +38,8 @@ public class ClientQueue extends MessageQueue {
             print("list");
             return;
         }
+
+        
         super.add(message);
     }
 
@@ -65,7 +67,6 @@ public class ClientQueue extends MessageQueue {
         Util.printMsg("    //[list songs] - prints out song names");
         Util.printMsg("    //[list song <foobar>] - prints songs named asdf");
         Util.printMsg("Download commands:");
-        Util.printMsg("    //[download] - downloads all files from the server");
         Util.printMsg("    //[download song <foobar>] - downloads all files from the server");
         Util.printMsg("    //[download artist Bassnectar]");
         Util.printMsg("==================================================");

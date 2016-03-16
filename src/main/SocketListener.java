@@ -11,9 +11,6 @@ public class SocketListener implements Runnable {
     Socket socket;
     MessageQueue messages;
 
-    public SocketListener( Socket s ){
-        this.socket = s;
-    }
     public SocketListener( Socket s, MessageQueue mq){
         this.socket = s;
         this.messages = mq;
@@ -22,11 +19,13 @@ public class SocketListener implements Runnable {
     public void run(){
         try(DataInputStream in = new DataInputStream(this.socket.getInputStream())){
             while((text = in.readUTF()) != null){
-                if(this.messages != null){
-                    this.messages.add(text);
+                if(text.startsWith("download filename ")){
+                    // start
                 } else {
-                    Util.printMsg(text);
+                    this.messages.add(text);
                 }
+
+
             }
         } catch (Exception e) {
             Util.catchException("Problem reading thread: ", e);

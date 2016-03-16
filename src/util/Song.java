@@ -24,7 +24,6 @@ public class Song {
     boolean hasAlbumArt = false;
     byte[] albumArt = null;
 
-
     public Song(String p){
         getMetadata(p);
     }

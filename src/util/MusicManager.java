@@ -41,13 +41,11 @@ public class MusicManager {
 	public void download(String query){
 		Util.printMsg(query);
 	}
-
 	public void downloadSong(String song){
 		Util.printMsg(song);
 	}
 	public void downloadArtist(String artist){
 		Util.printMsg(artist);
-
 	}
 
 	/** Gets a list of filenames */
@@ -106,9 +104,23 @@ public class MusicManager {
 		return answer;
 	}
 
-	public File[] downloadSongsByArtist(String artist){
-		Util.printMsg(artist);
-		return new File[10];
+	public File[] downloadSongsByArtist(String query){
+		ArrayList<File> f = new ArrayList<File>();
+
+		String artistQuery = query.toLowerCase();
+
+		for(Song song : songs){
+			String artist = song.getArtist();
+
+			if(artist != null){
+				if(artist.toLowerCase().equals(artistQuery)){
+					f.add(song.getFile());
+				}
+			}
+		}
+		File[] answer = new File[f.size()];
+		answer = f.toArray(answer);
+		return answer;
 	}
 
 	public int getNumberOfSongs(){

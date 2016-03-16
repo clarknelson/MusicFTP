@@ -59,6 +59,7 @@ public class ServerQueue extends MessageQueue {
         }
 
         if(message.startsWith("download")){
+
             String query = message.substring(9);
             if(query.startsWith("artist")){
                 String artist = query.substring(7);
@@ -108,7 +109,7 @@ public class ServerQueue extends MessageQueue {
         }
         print("--------------------------------------------------");
     }
-    
+
     private void getSongsByArtist(String artist){
         String[] songs = music.getSongsByArtist(artist);
         print("--------------------------------------------------");
@@ -131,5 +132,16 @@ public class ServerQueue extends MessageQueue {
     private void downloadArtist(String artist){
         File[] songs = music.downloadSongsByArtist(artist);
 
+        for(int i=0; i<songs.length; i++){
+            //print(songs[i]);
+
+            // send flag of number of files
+
+
+            // start upload thread with file array
+            // thread(Socket, File[])
+
+        }
+        Util.printMsg(Integer.toString(songs.length));
     }
 }
