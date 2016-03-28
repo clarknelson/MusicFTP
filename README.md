@@ -1,5 +1,4 @@
 # MusicFTP
-*Authors:* Clark Nelson, Chaz Stulginskas, Eleanor Holley, Raul Vasquez
 
 Final project for Distributed Systems CSC376 at DePaul University. An application designed to share music over the internet. The server program designed to accept incoming clients and parse file requests. The client program is designed to request and search files.
 
@@ -61,6 +60,19 @@ After the server is running, connect a client using `./src/musicftp-client`
 - [ ] Support a JSON config file to store authentication information, song directory, song information, etc [Mid priority]
 - [ ] Allow program to be run when computer does not have an internet connection. Useful for debugging and working offline. [Low priority]
 
+#### Multiple Clients
+
+- [ ] Server launches new thread for each connection accepted [Mid priority]
+- [ ] Write code in Server.java that starts ServerSocket.accept() in a new thread
+- [ ] This thread is in charge of doing the normal server/client management stuff (open output/input)
+- [ ] Maintain list of clients (Sockets) in an array for cleanup
+
+#### Cleanup
+
+- [ ] Shutdown server/client without exceptions [low priority]
+- [ ] Exceptions are being thrown because the Socket is being closed without the stream being closed first
+- [ ] The cheap way to fix this is to remove the print messages
+
 #### List songs
 
 - [X] Client sends request to server for list of songs [High priority]
@@ -70,29 +82,16 @@ After the server is running, connect a client using `./src/musicftp-client`
 
 #### Download song
 
-- [ ] Client sends name of file to server [High priority]
-- [ ] Server receives song request
-- [ ] Server checks whether file exists and can be read
-- [ ] Server responds with either the number of bytes in the file or a negative number indicating an error
-- [ ] Server attempts to send requested file to Client
-
-#### Multiple Clients
-
-- [ ] Server launches new thread for each connection accepted [Mid priority]
-- [ ] Write code in Server.java that starts ServerSocket.accept() in a new thread
-- [ ] This thread is in charge of doing the normal server/client management stuff (open output/input)
-- [ ] Maintain list of clients (Sockets) in an array for cleanup
-
+- [X] Client sends name of file to server [High priority]
+- [X] Server receives song request
+- [X] Server checks whether file exists and can be read
+- [X] Server responds with either the number of bytes in the file or a negative number indicating an error
+- [X] Server attempts to send requested file to Client
+- 
 #### Search songs
 
 - [X] Parse song metadata (artist, song, album, length) for searching [Mid priority]
 - [X] Allow client to search song list [Mid priority]
-
-#### Cleanup
-
-- [ ] Shutdown server/client without exceptions [low priority]
-- [ ] Exceptions are being thrown because the Socket is being closed without the stream being closed first
-- [ ] The cheap way to fix this is to remove the print messages
 
 #### Extras
 
